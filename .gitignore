@@ -1,1 +1,4 @@
-/build
+build*
+*.iml
+proguard-rules.pro
+libs
