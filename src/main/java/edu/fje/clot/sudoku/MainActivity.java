@@ -10,5 +10,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // ESTO ES UNA PRUEBA
+
+
+        // CACA DE VACA I LA MARE QUE VA PARIR Android Studio
     }
 }
