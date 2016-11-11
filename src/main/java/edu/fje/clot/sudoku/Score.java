@@ -1,0 +1,24 @@
+package edu.fje.clot.sudoku;
+
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+/**
+ * Created by oriol on 11/8/16.
+ */
+
+public class Score implements Comparable<Score> {
+
+    private int value;
+    private Date date;
+
+    Score(int value, Date date){
+        this.value = value;
+        this.date = date;
+    }
+
+    @Override
+    public int compareTo(Score score) {
+       return this.value - score.value;
+    }
+}
