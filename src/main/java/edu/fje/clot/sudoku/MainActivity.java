@@ -12,7 +12,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnPlay;
 
-    public MainActivity() {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         btnPlay = (Button) findViewById(R.id.play);
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -20,12 +22,6 @@ public class MainActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_game);
             }
         });
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
     }
 }
