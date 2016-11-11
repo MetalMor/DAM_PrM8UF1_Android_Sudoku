@@ -21,4 +21,20 @@ public class Score implements Comparable<Score> {
     public int compareTo(Score score) {
        return this.value - score.value;
     }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

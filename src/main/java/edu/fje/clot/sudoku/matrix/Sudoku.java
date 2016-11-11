@@ -1,4 +1,4 @@
-package edu.fje.clot.sudoku;
+package edu.fje.clot.sudoku.matrix;
 
 /**
  * Created by oriol on 11/8/16.

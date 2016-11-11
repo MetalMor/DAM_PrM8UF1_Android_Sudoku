@@ -32,5 +32,11 @@ public class Scores {
         return list.subList(0, n);
     }
 
+    public ArrayList<Score> getList() {
+        return list;
+    }
 
+    public void setList(ArrayList<Score> list) {
+        this.list = list;
+    }
 }
