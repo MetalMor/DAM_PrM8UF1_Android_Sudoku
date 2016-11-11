@@ -3,5 +3,5 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FFEF03</color>
-    <color name="FonsBenvinguda">#FFC103</color>
+    <color name="colorBackground">#FFC103</color>
 </resources>

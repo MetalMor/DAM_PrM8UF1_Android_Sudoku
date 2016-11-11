@@ -10,13 +10,14 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnPlay;
 
+    public MainActivity() {
+        btnPlay = (Button) findViewById(R.id.play);
+        btnPlay.setOnClickListener(new LoadGameAction());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leads);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         setContentView(R.layout.activity_main);
     }
