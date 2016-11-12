@@ -10,5 +10,5 @@
         android:id="@+id/SudokuGridView"
         android:numColumns="9"
         android:horizontalSpacing="0dp"
-        android:verticalSpacing=dp"/>
+        android:verticalSpacing="0dp"/>
 </RelativeLayout>
