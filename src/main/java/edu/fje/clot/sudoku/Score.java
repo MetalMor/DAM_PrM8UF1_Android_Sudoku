@@ -10,7 +10,7 @@ import java.util.GregorianCalendar;
 public class Score implements Comparable<Score> {
 
     private int value;
-    private Date date;
+    private Date date=new Date();
 
     Score(int value, Date date){
         this.value = value;
@@ -19,7 +19,7 @@ public class Score implements Comparable<Score> {
 
     @Override
     public int compareTo(Score score) {
-       return this.value - score.value;
+       return score.value - this.value;
     }
 
     public int getValue() {

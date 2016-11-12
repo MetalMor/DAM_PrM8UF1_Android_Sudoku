@@ -2,6 +2,7 @@ package edu.fje.clot.sudoku;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class Scores {
 
-    private ArrayList<Score> list;
+    private ArrayList<Score> list= new ArrayList<Score>();
 
     public Scores(){
         //De momento nos las inventamos
@@ -31,7 +32,14 @@ public class Scores {
         Collections.sort(list);
         return list.subList(0, n);
     }
+    public Score getAnOrdenadeIndexTop(int n){
+        Collections.sort(list);
+        return list.get(n);
+    }
+    public int NumerodePuntuacions(){
 
+        return list.size();
+    }
     public ArrayList<Score> getList() {
         return list;
     }
