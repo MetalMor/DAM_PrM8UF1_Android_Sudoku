@@ -94,11 +94,11 @@ public class Sudoku {
             while(i<60){
                int x=rand.nextInt(9);
                 int y=rand.nextInt(9);
-               // if(sudoku[x][y]!=0&&elementsinsquash(sudoku,x,y)>2){
+                if(sudoku[x][y]!=0){  // &&elementsinsquash(sudoku,x,y)>2){
                         sudoku[x][y]=0;
                         i++;
 
-               // }
+                }
             }
 
     return sudoku;

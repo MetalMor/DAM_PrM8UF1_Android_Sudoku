@@ -5,10 +5,10 @@
     android:background="@color/colorBackground">
 
     <GridView
-        android:id="@+id/simpleGridView"
+        android:id="@+id/Graella"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:numColumns="9"
-        android:verticalSpacing="2dp"
-        android:adjustViewBounds="true"/><!--50dp vertical space set between grid items-->
+        android:verticalSpacing="0dp"
+        android:adjustViewBounds="true"/>
 </RelativeLayout>

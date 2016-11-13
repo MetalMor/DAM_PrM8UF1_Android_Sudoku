@@ -6,6 +6,9 @@ package edu.fje.clot.sudoku.matrix;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,9 +48,36 @@ public class SudokuAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = inflter.inflate(R.layout.filledcell, null);
-        TextView editText = (TextView) view.findViewById(R.id.SudokuNumberFix);
-        editText.setText(Integer.toString(sudoku1dimension[i]));
+
+
+
+            if (sudoku1dimension[i]==0){
+              /*  EditText editnumber = new EditText(context);
+                editnumber.setInputType(InputType.TYPE_CLASS_NUMBER);
+                editnumber.setMaxEms(1);
+             //   editnumber.setWidth(60);
+              //  editnumber.setHeight(60);
+                editnumber.setBackgroundColor(Color.WHITE);
+                editnumber.setCompoundDrawablePadding(15);
+                InputFilter[] FilterArray = new InputFilter[1];
+                FilterArray[0] = new InputFilter.LengthFilter(1);
+                editnumber.setFilters(FilterArray);
+                editnumber.setText(Integer.toString(sudoku1dimension[i]));
+                editnumber.setId(i);
+                view = inflter.inflate(R.layout.filledcell, null);
+                editnumber.setText("h");
+                */
+                view = inflter.inflate(R.layout.emptycell, null);
+                EditText edtxt = (EditText) view.findViewById(R.id.SudokuVariableNumber);
+                edtxt.setText("");
+            }else {
+                view = inflter.inflate(R.layout.filledcell, null);
+                TextView txtview = (TextView) view.findViewById(R.id.SudokuNumberFix);
+                txtview.setText(Integer.toString(sudoku1dimension[i]));
+            }
+
+
+
         return view;
     }
 }

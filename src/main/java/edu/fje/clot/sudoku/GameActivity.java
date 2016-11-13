@@ -63,7 +63,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
                  */
         int[] OnedimensionSudoku =Sudoku.ConvertoOneDimension(EmptySudoku);
-        GridView   Grid = (GridView) findViewById(R.id.simpleGridView);
+        GridView   Grid = (GridView) findViewById(R.id.Graella);
         SudokuAdapter customAdapter = new SudokuAdapter(getApplicationContext(),OnedimensionSudoku);
         Grid.setAdapter(customAdapter);
 
