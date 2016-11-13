@@ -29,7 +29,10 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="350dp"
-        android:layout_height="257dp">
+        android:layout_height="380dp"
+        android:baselineAligned="false"
+        android:gravity="center_vertical|center_horizontal"
+        android:foregroundGravity="center_vertical|center_horizontal">
 
         <TextView
             android:text="@string/Maxpuntaucions"
@@ -43,8 +46,9 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/LlistaPuntuacions" />
+            android:id="@+id/LlistaPuntuacions"
+            android:layout_weight="1" />
+
     </LinearLayout>
 
     <Button
