@@ -33,6 +33,21 @@ public class Sudoku {
         }
         return instance;
     }
+
+    public static int[] ConvertoOneDimension(int[][] Bidimensional){
+        int[] vector = new int[Bidimensional[0].length*Bidimensional.length];
+        int n=0;
+        for(int i=0;i<Bidimensional.length;i++){
+            for (int k=0;k<Bidimensional[i].length;k++){
+                vector[n]=Bidimensional[i][k];
+                n++;
+            }
+        }
+        return vector;
+    }
+
+
+
     public int[][] Load(){
         ArrayList<int[][]> AllSudokus = new ArrayList<int[][]>();
 
@@ -76,14 +91,14 @@ public class Sudoku {
     public int[][] ClearSudoku(int[][] sudoku){
         Random rand = new Random();
             int i =0;
-            while(i<25){
+            while(i<60){
                int x=rand.nextInt(9);
                 int y=rand.nextInt(9);
-                if(sudoku[x][y]!=0&&elementsinsquash(sudoku,x,y)>2){
+               // if(sudoku[x][y]!=0&&elementsinsquash(sudoku,x,y)>2){
                         sudoku[x][y]=0;
                         i++;
 
-                }
+               // }
             }
 
     return sudoku;
