@@ -3,7 +3,9 @@ package edu.fje.clot.sudoku;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import edu.fje.clot.sudoku.matrix.Sudoku;
 
@@ -21,16 +23,21 @@ public class GameActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SudokuSolution = Sudoku.getInstance().Load();
-        EmptySudoku = Sudoku.getInstance().ClearSudoku(SudokuSolution, 56);
-        GameMotor gameMotor = new GameMotor();
-        gameMotor.setSudoku(EmptySudoku);
+        EmptySudoku = Sudoku.getInstance().ClearSudoku(SudokuSolution, 80);
+
         setContentView(R.layout.activity_game);
 
-        int[] OnedimensionSudoku =Sudoku.ConvertoOneDimension(EmptySudoku);
+        final int[] OnedimensionSudoku =Sudoku.ConvertoOneDimension(EmptySudoku);
         GridView   Grid = (GridView) findViewById(R.id.Graella);
         SudokuAdapter customAdapter = new SudokuAdapter(getApplicationContext(),OnedimensionSudoku);
         Grid.setAdapter(customAdapter);
-
+        Grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int Slecteditem=OnedimensionSudoku[position];
+                Toast.makeText(getApplicationContext(), Slecteditem, Toast.LENGTH_SHORT).show();
+            }
+        });
 /*
 */
     }
