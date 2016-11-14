@@ -88,18 +88,18 @@ public class Sudoku {
             return AllSudokus.get(rand.nextInt(AllSudokus.size()));
     }
 
-    public int[][] ClearSudoku(int[][] sudoku){
+    public int[][] ClearSudoku(int[][] sudoku,int Q){
         Random rand = new Random();
-            int i =0;
-            while(i<60){
-               int x=rand.nextInt(9);
-                int y=rand.nextInt(9);
-                if(sudoku[x][y]!=0&&elementsinsquash(sudoku,x,y)>2){
-                        sudoku[x][y]=0;
-                        i++;
-
-                }
+        int i =0;
+        int numbersinsquash= Math.round(Q/9);
+        while(i<Q){
+            int x=rand.nextInt(9);
+            int y=rand.nextInt(9);
+            if(sudoku[x][y]!=0&&elementsinsquash(sudoku,x,y)>numbersinsquash){
+                sudoku[x][y]=0;
+                i++;
             }
+        }
 
     return sudoku;
     }
