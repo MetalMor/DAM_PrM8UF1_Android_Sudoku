@@ -94,7 +94,7 @@ public class Sudoku {
             while(i<60){
                int x=rand.nextInt(9);
                 int y=rand.nextInt(9);
-                if(sudoku[x][y]!=0){  // &&elementsinsquash(sudoku,x,y)>2){
+                if(sudoku[x][y]!=0&&elementsinsquash(sudoku,x,y)>2){
                         sudoku[x][y]=0;
                         i++;
 
@@ -105,11 +105,11 @@ public class Sudoku {
     }
     public int elementsinsquash(int[][]sudoku,int x,int y){
         int minx=(x/3)*3; int maxx = (x/3)*3+3;
-        int miny=(x/3)*3; int maxy = (x/3)*3+3;
+        int miny=(y/3)*3; int maxy = (y/3)*3+3;
         int nelements=0;
         for(int i=minx;i<maxx;i++){
-            for (int k=miny;i<maxy;i++){
-                if (sudoku[i][x]!=0)
+            for (int k=miny;k<maxy;k++){
+                if (sudoku[i][k]!=0)
                     nelements++;
             }
         }
