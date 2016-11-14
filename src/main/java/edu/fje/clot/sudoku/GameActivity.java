@@ -1,7 +1,9 @@
 package edu.fje.clot.sudoku;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -29,15 +31,9 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
         final int[] OnedimensionSudoku =Sudoku.ConvertoOneDimension(EmptySudoku);
         GridView   Grid = (GridView) findViewById(R.id.Graella);
-        SudokuAdapter customAdapter = new SudokuAdapter(getApplicationContext(),OnedimensionSudoku);
+        final SudokuAdapter customAdapter = new SudokuAdapter(getApplicationContext(),OnedimensionSudoku);
         Grid.setAdapter(customAdapter);
-        Grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int Slecteditem=OnedimensionSudoku[position];
-                Toast.makeText(getApplicationContext(), Slecteditem, Toast.LENGTH_SHORT).show();
-            }
-        });
+
 /*
 */
     }

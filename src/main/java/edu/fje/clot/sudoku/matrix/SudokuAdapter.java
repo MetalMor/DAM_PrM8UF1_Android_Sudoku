@@ -54,14 +54,43 @@ public class SudokuAdapter extends BaseAdapter {
             if (sudoku1dimension[i]==0){
 
                 view = inflter.inflate(R.layout.emptycell, null);
-                EditText edtxt = (EditText) view.findViewById(R.id.SudokuVariableNumber);
+                final EditText edtxt = (EditText) view.findViewById(R.id.SudokuVariableNumber);
                 edtxt.setText("");
+                edtxt.setId(i);
+               edtxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (hasFocus) {
+                            final int position = v.getId();
+
+                            edtxt.setBackgroundColor(Color.GREEN);
+                        }else{
+
+                            edtxt.setBackgroundColor(Color.WHITE);
+
+                        }
+                    }});
             }else {
                 view = inflter.inflate(R.layout.filledcell, null);
-                TextView txtview = (TextView) view.findViewById(R.id.SudokuNumberFix);
+                final TextView txtview = (TextView) view.findViewById(R.id.SudokuNumberFix);
                 txtview.setText(Integer.toString(sudoku1dimension[i]));
+                txtview.setId(i);
+                txtview.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (hasFocus) {
+                            final int position = v.getId();
+
+                            txtview.setBackgroundColor(Color.GREEN);
+                        }else{
+
+                            txtview.setBackgroundColor(Color.WHITE);
+
+                        }
+                    }});
             }
 
+
+
+        //we need to update adapter once we finish with editing
 
 
         return view;
