@@ -1,5 +1,7 @@
 package edu.fje.clot.sudoku.matrix;
 
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -88,10 +90,17 @@ public class Sudoku {
             return AllSudokus.get(rand.nextInt(AllSudokus.size()));
     }
 
+    private int format(double number) {
+        NumberFormat nf = NumberFormat.getInstance();
+        nf.setMaximumFractionDigits(0);
+        nf.setRoundingMode(RoundingMode.UP);
+        return Integer.parseInt(nf.format(number));
+    }
+
     public int[][] ClearSudoku(int[][] sudoku,int Q){
         Random rand = new Random();
         int i =0;
-        int numbersinsquash= Math.round(Q/9);
+        int numbersinsquash= format(Q/9);
         while(i<Q){
             int x=rand.nextInt(9);
             int y=rand.nextInt(9);
