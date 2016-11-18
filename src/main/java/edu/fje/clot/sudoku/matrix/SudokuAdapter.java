@@ -60,19 +60,19 @@ public class SudokuAdapter extends BaseAdapter {
                 edtxt.setText("");
                 edtxt.setId(i);
 
-               rel.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+               edtxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     public void onFocusChange(View v, boolean hasFocus) {
                         if (hasFocus) {
                             final int position = v.getId();
                            // RelativeLayout rel = (RelativeLayout) v.findViewById(R.id.EmptyCell);
-                          //rel.setBackgroundColor(Color.GREEN);
-                            EditText edtxt= (EditText) v.findViewById(R.id.SudokuVariableNumber);
-                            edtxt.setBackgroundColor(Color.GREEN);
+                          rel.setBackgroundResource(R.drawable.cell_shape_focused);
+                            //EditText edtxt= (EditText) v.findViewById(R.id.SudokuVariableNumber);
+                          //  edtxt.setBackgroundColor(Color.GREEN);
 
                         }else{
 
-                            RelativeLayout rel = (RelativeLayout) v.findViewById(R.id.EmptyCell);
-                            rel.setBackgroundColor(Color.WHITE);
+                           // RelativeLayout rel = (RelativeLayout) v.findViewById(R.id.EmptyCell);
+                            rel.setBackgroundResource(R.drawable.cell_shape);
 
                         }
                     }});
