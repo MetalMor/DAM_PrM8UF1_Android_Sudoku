@@ -25,7 +25,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SudokuSolution = Sudoku.getInstance().Load();
-        EmptySudoku = Sudoku.getInstance().ClearSudoku(SudokuSolution, 80);
+        EmptySudoku = Sudoku.getInstance().ClearSudoku(SudokuSolution, 25);
 
         setContentView(R.layout.activity_game);
 

@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
+    android:id="@+id/EmptyCell"
     android:background="@drawable/cell_shape">
 
     <EditText
@@ -19,6 +20,7 @@
         android:layout_width="30dp"
         android:textColor="#666666"
         android:textAlignment="center"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginLeft="5dp"
+        />
 
 </RelativeLayout>

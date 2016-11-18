@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import edu.fje.clot.sudoku.R;
@@ -55,17 +56,23 @@ public class SudokuAdapter extends BaseAdapter {
 
                 view = inflter.inflate(R.layout.emptycell, null);
                 final EditText edtxt = (EditText) view.findViewById(R.id.SudokuVariableNumber);
+                final RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.EmptyCell);
                 edtxt.setText("");
                 edtxt.setId(i);
-               edtxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+               rel.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     public void onFocusChange(View v, boolean hasFocus) {
                         if (hasFocus) {
                             final int position = v.getId();
-
+                           // RelativeLayout rel = (RelativeLayout) v.findViewById(R.id.EmptyCell);
+                          //rel.setBackgroundColor(Color.GREEN);
+                            EditText edtxt= (EditText) v.findViewById(R.id.SudokuVariableNumber);
                             edtxt.setBackgroundColor(Color.GREEN);
+
                         }else{
 
-                            edtxt.setBackgroundColor(Color.WHITE);
+                            RelativeLayout rel = (RelativeLayout) v.findViewById(R.id.EmptyCell);
+                            rel.setBackgroundColor(Color.WHITE);
 
                         }
                     }});
