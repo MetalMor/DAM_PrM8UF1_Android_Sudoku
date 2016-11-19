@@ -7,8 +7,10 @@ package edu.fje.clot.sudoku.matrix;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,53 +50,6 @@ public class SudokuAdapter extends BaseAdapter {
     }
 
 
-
-    public void FocusMaker(View v, final RelativeLayout rel){
-
-        v.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    final int position = v.getId();
-                    // RelativeLayout rel = (RelativeLayout) v.findViewById(R.id.EmptyCell);
-                    rel.setBackgroundResource(R.drawable.cell_shape_focused);
-                    for(int i=0; i<81; i++) {
-                        RelativeLayout rel2 = (RelativeLayout) ((ViewGroup) rel.getParent()).getChildAt(i);
-                        rel2.setBackgroundResource(R.drawable.cell_shape);
-                    }
-                    for(int i= position-position%9; i<position+(9-position%9); i++) {
-                        RelativeLayout rel2 = (RelativeLayout) ((ViewGroup) rel.getParent()).getChildAt(i);
-                        rel2.setBackgroundResource(R.drawable.cell_shape_focused);
-                        //EditText edtxt= (EditText) v.findViewById(R.id.SudokuVariableNumber);
-                        //  edtxt.setBackgroundColor(Color.GREEN);
-                    }
-                    for(int i= position%9; i<81; i+=9) {
-                        RelativeLayout rel2 = (RelativeLayout) ((ViewGroup) rel.getParent()).getChildAt(i);
-                        rel2.setBackgroundResource(R.drawable.cell_shape_focused);
-                        //EditText edtxt= (EditText) v.findViewById(R.id.SudokuVariableNumber);
-                        //  edtxt.setBackgroundColor(Color.GREEN);
-                    }
-                    //int x=(position+1)/3;
-                    int Qx=((position)/3)%3;
-                    int Qy= (position/9)/3;
-                    // int miny=((position%9)/3)*3; int maxy = ((position%9)/3)*3+3;
-                    for(int i=0; i<81; i++) {
-
-                        int posx= i%9;
-                        if  ((Qx==((i)/3)%3)&&(Qy==(i/9)/3)){
-                            RelativeLayout rel2 = (RelativeLayout) ((ViewGroup) rel.getParent()).getChildAt(i);
-                            rel2.setBackgroundResource(R.drawable.cell_shape_focused);
-                        }
-                    }
-
-                }else{
-
-                    // RelativeLayout rel = (RelativeLayout) v.findViewById(R.id.EmptyCell);
-                    rel.setBackgroundResource(R.drawable.cell_shape);
-
-                }
-            }});
-
-    }
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
@@ -107,7 +62,8 @@ public class SudokuAdapter extends BaseAdapter {
                 final RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.EmptyCell);
 
              edtxt.setId(i);
-                FocusMaker(edtxt,rel );
+                FocusClickListener.FocusMaker(edtxt,rel );
+              //  FocusClickListener.ErrorPaintListener( (EditText) rel.getChildAt(0), rel, rel2,text);
 
             }else {
                 view = inflter.inflate(R.layout.filledcell, null);
@@ -116,7 +72,7 @@ public class SudokuAdapter extends BaseAdapter {
                 txtview.setId(i);
                 final RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.FilledCell);
 
-                    FocusMaker(txtview,rel );
+                FocusClickListener.FocusMaker(txtview,rel );
 
             }
 
