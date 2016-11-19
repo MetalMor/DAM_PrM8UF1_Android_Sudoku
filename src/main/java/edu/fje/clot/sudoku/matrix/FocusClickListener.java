@@ -44,17 +44,21 @@ public class FocusClickListener {
                     // RelativeLayout rel = (RelativeLayout) v.findViewById(R.id.EmptyCell);
                     rel.setBackgroundResource(R.drawable.cell_shape_focused);
                     if (rel.getChildAt(0) instanceof TextView){
-                    ((TextView) rel.getChildAt(0)).setTextColor(Color.BLACK);}
+                   // ((TextView) rel.getChildAt(0)).setTextColor(Color.BLACK);
+                        }
                     if (rel.getChildAt(0) instanceof EditText){
-                        ((EditText) rel.getChildAt(0)).setTextColor(Color.BLACK);}
+                     //   ((EditText) rel.getChildAt(0)).setTextColor(Color.BLACK);
+                        }
                     for(int i=0; i<81; i++) {
                         RelativeLayout rel2 = (RelativeLayout) ((ViewGroup) rel.getParent()).getChildAt(i);
                         rel2.setBackgroundResource(R.drawable.cell_shape);
-                       /* if (rel2.getChildAt(0) instanceof TextView){
-                            ((TextView) rel.getChildAt(0)).setTextColor(Color.BLACK);}
+                       if (rel2.getChildAt(0) instanceof TextView){
+                         //   ((TextView) rel2.getChildAt(0)).setTextColor(Color.BLACK);
+                           }
                         if (rel2.getChildAt(0) instanceof EditText){
-                            ((EditText) rel.getChildAt(0)).setTextColor(Color.BLACK);}
-                        */
+                           // ((EditText) rel2.getChildAt(0)).setTextColor(Color.BLACK);
+                            }
+
                     }
                     for(int i= position-position%9; i<position+(9-position%9); i++) {
                        final RelativeLayout rel2 = (RelativeLayout) ((ViewGroup) rel.getParent()).getChildAt(i);
@@ -105,22 +109,25 @@ public class FocusClickListener {
     private static void Errorspainting(final RelativeLayout rel,final RelativeLayout rel2,final String text, boolean Mateixacasella) {
         if (rel2.getChildAt(0) instanceof EditText) {
             String text2="";
+
             if (rel.getChildAt(0)instanceof TextView){
 
             text2 = ((TextView) rel2.getChildAt(0)).getText().toString();
+
                 if (text2.equals(text) && (!text2.equals("")) && (!Mateixacasella)) {
                     ((TextView) rel.getChildAt(0)).setTextColor(Color.RED);
                     rel2.setBackgroundResource(R.drawable.cell_shape_warning);
-                    Log.i(TAG, text2+"  "+text+"   ");
+
                 }
             }
             if (rel.getChildAt(0)instanceof EditText){
                text2 = ((EditText) rel2.getChildAt(0)).getText().toString();
 
+
                 if (text2.equals(text) && (!text2.equals("")) && (!Mateixacasella)) {
                     ((EditText) rel.getChildAt(0)).setTextColor(Color.RED);
                     rel2.setBackgroundResource(R.drawable.cell_shape_warning);
-                    Log.i(TAG, text2+"  "+text+"   ");
+
                 }
 
             }
@@ -135,13 +142,15 @@ public class FocusClickListener {
         }
     }
 
-    public static void ErrorPaintListener(EditText edtxt, final RelativeLayout rel, final RelativeLayout rel2, final String text) {
+    public static void ErrorPaintListener(final EditText edtxt, final RelativeLayout rel, final RelativeLayout rel2, final String text) {
 
         edtxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-              //  Errorspainting(rel, rel2, text,co);
-                ((EditText) rel.getChildAt(0)).setTextColor(Color.BLUE);
+                boolean mateixacela=(rel2.getChildAt(0)==edtxt);
+                Errorspainting(rel, rel2,s.toString(),mateixacela);
+
+
             }
 
             @Override
