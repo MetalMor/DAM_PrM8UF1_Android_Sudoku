@@ -48,6 +48,7 @@ public class FocusClickListener {
                         }
                     if (rel.getChildAt(0) instanceof EditText){
                      //   ((EditText) rel.getChildAt(0)).setTextColor(Color.BLACK);
+                        ((EditText) rel.getChildAt(0)).setSelection(text.length());
                         }
                     for(int i=0; i<81; i++) {
                         RelativeLayout rel2 = (RelativeLayout) ((ViewGroup) rel.getParent()).getChildAt(i);
