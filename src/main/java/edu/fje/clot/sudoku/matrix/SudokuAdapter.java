@@ -105,8 +105,8 @@ public class SudokuAdapter extends BaseAdapter {
                 view = inflter.inflate(R.layout.emptycell, null);
                 final EditText edtxt = (EditText) view.findViewById(R.id.SudokuVariableNumber);
                 final RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.EmptyCell);
-                edtxt.setText("");
-                edtxt.setId(i);
+
+             edtxt.setId(i);
                 FocusMaker(edtxt,rel );
 
             }else {
