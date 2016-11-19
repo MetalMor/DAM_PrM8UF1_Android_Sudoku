@@ -47,6 +47,54 @@ public class SudokuAdapter extends BaseAdapter {
         return 0;
     }
 
+
+
+    public void FocusMaker(View v, final RelativeLayout rel){
+
+        v.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    final int position = v.getId();
+                    // RelativeLayout rel = (RelativeLayout) v.findViewById(R.id.EmptyCell);
+                    rel.setBackgroundResource(R.drawable.cell_shape_focused);
+                    for(int i=0; i<81; i++) {
+                        RelativeLayout rel2 = (RelativeLayout) ((ViewGroup) rel.getParent()).getChildAt(i);
+                        rel2.setBackgroundResource(R.drawable.cell_shape);
+                    }
+                    for(int i= position-position%9; i<position+(9-position%9); i++) {
+                        RelativeLayout rel2 = (RelativeLayout) ((ViewGroup) rel.getParent()).getChildAt(i);
+                        rel2.setBackgroundResource(R.drawable.cell_shape_focused);
+                        //EditText edtxt= (EditText) v.findViewById(R.id.SudokuVariableNumber);
+                        //  edtxt.setBackgroundColor(Color.GREEN);
+                    }
+                    for(int i= position%9; i<81; i+=9) {
+                        RelativeLayout rel2 = (RelativeLayout) ((ViewGroup) rel.getParent()).getChildAt(i);
+                        rel2.setBackgroundResource(R.drawable.cell_shape_focused);
+                        //EditText edtxt= (EditText) v.findViewById(R.id.SudokuVariableNumber);
+                        //  edtxt.setBackgroundColor(Color.GREEN);
+                    }
+                    //int x=(position+1)/3;
+                    int Qx=((position)/3)%3;
+                    int Qy= (position/9)/3;
+                    // int miny=((position%9)/3)*3; int maxy = ((position%9)/3)*3+3;
+                    for(int i=0; i<81; i++) {
+
+                        int posx= i%9;
+                        if  ((Qx==((i)/3)%3)&&(Qy==(i/9)/3)){
+                            RelativeLayout rel2 = (RelativeLayout) ((ViewGroup) rel.getParent()).getChildAt(i);
+                            rel2.setBackgroundResource(R.drawable.cell_shape_focused);
+                        }
+                    }
+
+                }else{
+
+                    // RelativeLayout rel = (RelativeLayout) v.findViewById(R.id.EmptyCell);
+                    rel.setBackgroundResource(R.drawable.cell_shape);
+
+                }
+            }});
+
+    }
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
@@ -59,40 +107,17 @@ public class SudokuAdapter extends BaseAdapter {
                 final RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.EmptyCell);
                 edtxt.setText("");
                 edtxt.setId(i);
+                FocusMaker(edtxt,rel );
 
-               edtxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                    public void onFocusChange(View v, boolean hasFocus) {
-                        if (hasFocus) {
-                            final int position = v.getId();
-                           // RelativeLayout rel = (RelativeLayout) v.findViewById(R.id.EmptyCell);
-                          rel.setBackgroundResource(R.drawable.cell_shape_focused);
-                            //EditText edtxt= (EditText) v.findViewById(R.id.SudokuVariableNumber);
-                          //  edtxt.setBackgroundColor(Color.GREEN);
-
-                        }else{
-
-                           // RelativeLayout rel = (RelativeLayout) v.findViewById(R.id.EmptyCell);
-                            rel.setBackgroundResource(R.drawable.cell_shape);
-
-                        }
-                    }});
             }else {
                 view = inflter.inflate(R.layout.filledcell, null);
                 final TextView txtview = (TextView) view.findViewById(R.id.SudokuNumberFix);
                 txtview.setText(Integer.toString(sudoku1dimension[i]));
                 txtview.setId(i);
-                txtview.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                    public void onFocusChange(View v, boolean hasFocus) {
-                        if (hasFocus) {
-                            final int position = v.getId();
+                final RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.FilledCell);
 
-                            txtview.setBackgroundColor(Color.GREEN);
-                        }else{
+                    FocusMaker(txtview,rel );
 
-                            txtview.setBackgroundColor(Color.WHITE);
-
-                        }
-                    }});
             }
 
 
@@ -102,4 +127,6 @@ public class SudokuAdapter extends BaseAdapter {
 
         return view;
     }
+
+
 }
