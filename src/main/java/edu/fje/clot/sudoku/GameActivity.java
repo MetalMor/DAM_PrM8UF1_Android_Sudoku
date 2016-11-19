@@ -21,34 +21,42 @@ import edu.fje.clot.sudoku.matrix.SudokuAdapter;
 public class GameActivity extends Activity implements View.OnClickListener {
     int[][] SudokuSolution;
     int[][] EmptySudoku;
-
+    GridView   Grid;
+    SudokuAdapter customAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SudokuSolution = Sudoku.getInstance().Load();
-        EmptySudoku = Sudoku.getInstance().ClearSudoku(SudokuSolution, 25);
+        EmptySudoku = Sudoku.getInstance().ClearSudoku(SudokuSolution, 56);
 
         setContentView(R.layout.activity_game);
 
         final int[] OnedimensionSudoku =Sudoku.ConvertoOneDimension(EmptySudoku);
-        GridView   Grid = (GridView) findViewById(R.id.Graella);
-        final SudokuAdapter customAdapter = new SudokuAdapter(getApplicationContext(),OnedimensionSudoku);
+         Grid = (GridView) findViewById(R.id.Graella);
+        customAdapter = new SudokuAdapter(getApplicationContext(),OnedimensionSudoku);
         Grid.setAdapter(customAdapter);
 
 /*
 */
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        setContentView(R.layout.activity_game);
-    }
 
     @Override
     public void onClick(View view) {
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
 
+            outState.putInt("gridView" ,Grid.getId());
+    }
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        int viewId = savedInstanceState.getInt("gridView");
+        Grid.setId(viewId);
+    }
 }
