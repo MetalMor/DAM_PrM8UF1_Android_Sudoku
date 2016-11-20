@@ -1,4 +1,4 @@
-package edu.fje.clot.sudoku;
+package edu.fje.clot.sudoku.activities;
 
 import android.app.Activity;
 import android.content.res.Configuration;
@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import edu.fje.clot.sudoku.R;
 import edu.fje.clot.sudoku.matrix.Sudoku;
 
 import edu.fje.clot.sudoku.matrix.SudokuAdapter;

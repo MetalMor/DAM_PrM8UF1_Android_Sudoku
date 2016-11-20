@@ -1,7 +1,6 @@
-package edu.fje.clot.sudoku;
+package edu.fje.clot.sudoku.scores;
 
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * Created by oriol on 11/8/16.

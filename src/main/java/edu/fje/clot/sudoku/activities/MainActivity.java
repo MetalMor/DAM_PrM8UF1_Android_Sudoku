@@ -1,19 +1,15 @@
-package edu.fje.clot.sudoku;
+package edu.fje.clot.sudoku.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
-import java.util.List;
-
-import edu.fje.clot.sudoku.action.LoadGameAction;
+import edu.fje.clot.sudoku.R;
+import edu.fje.clot.sudoku.scores.ScoreAdapter;
+import edu.fje.clot.sudoku.scores.Scores;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 

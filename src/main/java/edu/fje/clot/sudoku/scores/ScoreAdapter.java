@@ -1,19 +1,17 @@
-package edu.fje.clot.sudoku;
+package edu.fje.clot.sudoku.scores;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 //import android.R;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
 
-import static java.security.AccessController.getContext;
+import edu.fje.clot.sudoku.R;
 
 /**
  * Created by oriol on 11/12/16.

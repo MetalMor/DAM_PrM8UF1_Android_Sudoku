@@ -41,7 +41,7 @@ public class SudokuAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return sudoku1dimension[i];
     }
 
     @Override

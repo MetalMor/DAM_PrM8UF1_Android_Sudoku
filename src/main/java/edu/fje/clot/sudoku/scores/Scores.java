@@ -1,8 +1,7 @@
-package edu.fje.clot.sudoku;
+package edu.fje.clot.sudoku.scores;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
