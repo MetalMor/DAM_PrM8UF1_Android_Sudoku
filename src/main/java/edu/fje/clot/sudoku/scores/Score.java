@@ -11,7 +11,7 @@ public class Score implements Comparable<Score> {
     private int value;
     private Date date=new Date();
 
-    Score(int value, Date date){
+    public Score(int value, Date date){
         this.value = value;
         this.date = date;
     }
