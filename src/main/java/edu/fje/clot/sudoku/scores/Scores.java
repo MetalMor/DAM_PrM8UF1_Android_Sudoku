@@ -10,9 +10,9 @@ import java.util.List;
  */
 
 
-public class Scores {
+public class Scores implements IScores {
 
-    private ArrayList<Score> list= new ArrayList<Score>();
+    private List<Score> list = new ArrayList<>();
 
     public Scores(){
         //De momento nos las inventamos
@@ -39,7 +39,7 @@ public class Scores {
 
         return list.size();
     }
-    public ArrayList<Score> getList() {
+    public List<Score> getList() {
         return list;
     }
 

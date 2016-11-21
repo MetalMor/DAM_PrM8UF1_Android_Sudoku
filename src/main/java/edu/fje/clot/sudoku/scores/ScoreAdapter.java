@@ -19,18 +19,18 @@ import edu.fje.clot.sudoku.R;
 
 public class ScoreAdapter extends BaseAdapter{
     // Declare Variables
-    Context context;
-    Scores Puntuacions;
-    int[] imatges;
-    LayoutInflater inflater;
+    private Context context;
+    private IScores Puntuacions;
+    private int[] imatges;
+    private LayoutInflater inflater;
 
-    public ScoreAdapter(Context context,  Scores Puntuacions, int[] imatges) {
+    public ScoreAdapter(Context context, IScores Puntuacions, int[] imatges) {
         this.context = context;
         this.Puntuacions = Puntuacions;
         this.imatges=imatges;
     }
 
-  public int getCount() {
+    public int getCount() {
         return Puntuacions.NumerodePuntuacions();
     }
 

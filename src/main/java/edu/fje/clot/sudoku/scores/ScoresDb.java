@@ -14,7 +14,7 @@ import edu.fje.clot.sudoku.scores.db.ScoreDbUtil;
  */
 
 
-public class ScoresDb {
+public class ScoresDb implements IScores {
 
     private ScoreDbUtil scoreTable;
 
@@ -45,6 +45,9 @@ public class ScoresDb {
     public int NumerodePuntuacions(){
 
         return scoreTable.count();
+    }
+    public List<Score> getList() {
+        return scoreTable.findAll();
     }
 
 }

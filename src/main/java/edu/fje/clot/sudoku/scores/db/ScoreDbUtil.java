@@ -80,6 +80,7 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
         Cursor cursor = getReadableDatabase().query(ScoreContract.ScoreTable.TABLE_NAME,
                 QUERY_PROJECTION, null, null, null, null, ORDER);
         cursor.close();
+        System.out.println("HOWDY");
         // 1 -> ID, 2 -> DATE, 3 -> VALUE
         if(cursor.getCount() > 0)
             for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext())

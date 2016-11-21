@@ -8,13 +8,14 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import edu.fje.clot.sudoku.R;
+import edu.fje.clot.sudoku.scores.IScores;
 import edu.fje.clot.sudoku.scores.ScoreAdapter;
 import edu.fje.clot.sudoku.scores.Scores;
+import edu.fje.clot.sudoku.scores.ScoresDb;
 
 public class MainActivity extends Activity implements View.OnClickListener {
-
     private Button btnPlay;
-    Scores Puntuacions;
+    IScores Puntuacions;
     private ListView ScoreWins;
     ScoreAdapter adapter;
     int[] imatges= {
@@ -22,6 +23,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             R.drawable.medallaplata,
             R.drawable.medallabronze,
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +32,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btnPlay.setOnClickListener( this);
 
         ScoreWins = (ListView) findViewById(R.id.LlistaPuntuacions);
+        Puntuacions = new ScoresDb(getApplicationContext());
         Puntuacions = new Scores();
 
         final ListView Llista = (ListView) findViewById(R.id.LlistaPuntuacions);
@@ -39,8 +42,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
     public void onClick(View arg0) {
         Intent intent = new Intent(this, GameActivity.class);
-
         startActivity(intent);
-
     }
 }
