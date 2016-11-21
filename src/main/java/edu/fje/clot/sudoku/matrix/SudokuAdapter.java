@@ -78,9 +78,6 @@ public class SudokuAdapter extends BaseAdapter {
 
 
 
-        //we need to update adapter once we finish with editing
-
-
         return view;
     }
 

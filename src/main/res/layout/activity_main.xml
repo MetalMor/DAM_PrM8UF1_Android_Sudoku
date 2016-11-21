@@ -21,15 +21,15 @@
         android:gravity="center_vertical|center_horizontal"
         android:fontFamily="sans-serif-condensed"
         tools:fontFamily="cursive"
-        android:textSize="36sp"
+        android:textSize="30sp"
         android:textStyle="normal|bold"
-        android:layout_weight="0.39"
+        android:layout_weight="0.23"
         android:layout_gravity="center" />
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="350dp"
-        android:layout_height="380dp"
+        android:layout_width="wrap_content"
+        android:layout_height="272dp"
         android:baselineAligned="false"
         android:gravity="center_vertical|center_horizontal"
         android:foregroundGravity="center_vertical|center_horizontal">
@@ -44,10 +44,10 @@
             android:gravity="center_vertical|center_horizontal" />
 
         <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="335dp"
+            android:layout_height="198dp"
             android:id="@+id/LlistaPuntuacions"
-            android:layout_weight="1" />
+            android:layout_weight="0.43" />
 
     </LinearLayout>
 
