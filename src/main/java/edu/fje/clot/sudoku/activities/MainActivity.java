@@ -36,7 +36,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         adapter = new ScoreAdapter(this, Puntuacions, imatges);
         ((ListView) findViewById(R.id.LlistaPuntuacions)).setAdapter(adapter);
-        //helpimg.setImageResource(R.drawable.help);
+        helpimg = (ImageView) findViewById(R.id.imageView2);
+        helpimg.setImageResource(R.drawable.help);
     }
     public void onClick(View arg0) {
         Intent intent = new Intent(this, GameActivity.class);
