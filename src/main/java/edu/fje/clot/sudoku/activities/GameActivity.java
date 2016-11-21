@@ -27,13 +27,12 @@ public class GameActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SudokuSolution = Sudoku.getInstance().Load();
+        SudokuSolution = Sudoku.ConvertoTwoDimension(getResources().getIntArray(R.array.matrix_1));
         EmptySudoku = Sudoku.getInstance().ClearSudoku(SudokuSolution, 56);
-        int[] matrix = getResources().getIntArray(R.array.matrix);
         setContentView(R.layout.activity_game);
 
         final int[] OnedimensionSudoku =Sudoku.ConvertoOneDimension(EmptySudoku);
-         Grid = (GridView) findViewById(R.id.Graella);
+        Grid = (GridView) findViewById(R.id.Graella);
         customAdapter = new SudokuAdapter(getApplicationContext(),OnedimensionSudoku);
         Grid.setAdapter(customAdapter);
     }

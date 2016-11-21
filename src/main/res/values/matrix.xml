@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer-array name="matrix">
+    <integer-array name="matrix_1">
         <item>4</item>
         <item>7</item>
         <item>8</item>
