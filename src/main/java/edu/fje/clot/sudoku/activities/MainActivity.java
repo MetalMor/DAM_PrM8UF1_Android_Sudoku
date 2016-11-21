@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import edu.fje.clot.sudoku.R;
@@ -17,6 +18,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     IScores Puntuacions;
     private ListView ScoreWins;
     ScoreAdapter adapter;
+    ImageView helpimg;
     int[] imatges = {
             R.drawable.medallaor,
             R.drawable.medallaplata,
@@ -34,7 +36,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         adapter = new ScoreAdapter(this, Puntuacions, imatges);
         ((ListView) findViewById(R.id.LlistaPuntuacions)).setAdapter(adapter);
-
+        //helpimg.setImageResource(R.drawable.help);
     }
     public void onClick(View arg0) {
         Intent intent = new Intent(this, GameActivity.class);

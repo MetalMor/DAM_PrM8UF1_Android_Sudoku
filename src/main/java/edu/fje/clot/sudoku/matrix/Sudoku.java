@@ -51,9 +51,10 @@ public class Sudoku {
     public static int[][] ConvertoTwoDimension(int[] matrix) {
         int length = (int) Math.sqrt(matrix.length);
         int[][] vector = new int[length][length];
-        for(int i = 0, k = -1; i < matrix.length; i++) {
-            if(i % length == 0) k++;
-            vector[k][i] = matrix[i];
+        for(int i = 0, k = -1,j=0; i < matrix.length; i++) {
+            if(i % length == 0){ k++; j=0;}
+            vector[k][j] = matrix[i];
+            j++;
         }
         return vector;
     }
