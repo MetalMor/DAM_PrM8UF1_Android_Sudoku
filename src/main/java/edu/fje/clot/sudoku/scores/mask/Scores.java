@@ -1,9 +1,12 @@
-package edu.fje.clot.sudoku.scores;
+package edu.fje.clot.sudoku.scores.mask;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
+
+import edu.fje.clot.sudoku.scores.Score;
+import edu.fje.clot.sudoku.scores.mask.IScores;
 
 /**
  * Created by oriol on 11/8/16.

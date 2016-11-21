@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 
 import edu.fje.clot.sudoku.R;
+import edu.fje.clot.sudoku.scores.mask.IScores;
 
 /**
  * Created by oriol on 11/12/16.

@@ -8,10 +8,10 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import edu.fje.clot.sudoku.R;
-import edu.fje.clot.sudoku.scores.IScores;
+import edu.fje.clot.sudoku.scores.mask.IScores;
 import edu.fje.clot.sudoku.scores.ScoreAdapter;
-import edu.fje.clot.sudoku.scores.Scores;
-import edu.fje.clot.sudoku.scores.ScoresDb;
+import edu.fje.clot.sudoku.scores.mask.Scores;
+import edu.fje.clot.sudoku.scores.mask.ScoresDb;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     private Button btnPlay;

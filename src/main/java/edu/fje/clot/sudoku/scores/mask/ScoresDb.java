@@ -1,13 +1,14 @@
-package edu.fje.clot.sudoku.scores;
+package edu.fje.clot.sudoku.scores.mask;
 
 import android.content.Context;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import edu.fje.clot.sudoku.scores.Score;
 import edu.fje.clot.sudoku.scores.db.ScoreDbUtil;
+import edu.fje.clot.sudoku.scores.mask.IScores;
 
 /**
  * Created by m0R on 11/21/16.
