@@ -32,7 +32,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btnPlay.setOnClickListener( this);
 
         ScoreWins = (ListView) findViewById(R.id.LlistaPuntuacions);
-        Puntuacions = new ScoresDb(getApplicationContext());
+        //Puntuacions = new ScoresDb(getApplicationContext());
         Puntuacions = new Scores();
 
         final ListView Llista = (ListView) findViewById(R.id.LlistaPuntuacions);
