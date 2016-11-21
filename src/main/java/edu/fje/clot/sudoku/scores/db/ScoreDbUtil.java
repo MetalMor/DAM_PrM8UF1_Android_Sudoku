@@ -26,7 +26,7 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
             ScoreContract.ScoreTable.COLUMN_VALUE
     };
     private static final String[] QUERY_COUNT = { ScoreContract.ScoreTable.COUNT };
-    private static final String BY_ID = " WHERE _ID=?";
+    private static final String BY_ID = "_ID=?";
 
     private static final String SQL_CREATE_TABLE = "CREATE TABLE " +
             ScoreContract.ScoreTable.TABLE_NAME + " (" +
@@ -62,29 +62,39 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
         Cursor cursor = getReadableDatabase().query(ScoreContract.ScoreTable.TABLE_NAME,
                 QUERY_PROJECTION, BY_ID, args, null, null, null
         );
+        Score result = null;
+        if(cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            result = new Score(
+                    cursor.getInt(cursor.getColumnIndex(ScoreContract.ScoreTable.COLUMN_VALUE)),
+                    new Date(cursor.getLong(cursor.getColumnIndex(ScoreContract.ScoreTable.COLUMN_DATE)))
+            );
+        }
         cursor.close();
-        cursor.moveToFirst();
-        return new Score(cursor.getInt(3), new Date(cursor.getLong(2)));
+        return result;
     }
 
     public int count() {
         Cursor cursor = getReadableDatabase().query(ScoreContract.ScoreTable.TABLE_NAME,
                 QUERY_COUNT, null, null, null, null, null);
-        cursor.close();
         cursor.moveToFirst();
-        return cursor.getInt(1);
+        int result = cursor.getInt(cursor.getColumnIndex(ScoreContract.ScoreTable.COUNT));
+        cursor.close();
+        return result;
     }
 
     public List<Score> findAll() {
         List<Score> result = new ArrayList<>();
         Cursor cursor = getReadableDatabase().query(ScoreContract.ScoreTable.TABLE_NAME,
                 QUERY_PROJECTION, null, null, null, null, ORDER);
-        cursor.close();
-        System.out.println("HOWDY");
         // 1 -> ID, 2 -> DATE, 3 -> VALUE
         if(cursor.getCount() > 0)
             for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext())
-                result.add(new Score(cursor.getInt(3), new Date(cursor.getLong(2))));
+                result.add(new Score(
+                        cursor.getInt(cursor.getColumnIndex(ScoreContract.ScoreTable.COLUMN_VALUE)),
+                        new Date(cursor.getLong(cursor.getColumnIndex(ScoreContract.ScoreTable.COLUMN_DATE)))
+                ));
+        cursor.close();
         return result;
     }
 
@@ -93,11 +103,13 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
         final String LIMIT = " LIMIT" + top;
         Cursor cursor = getReadableDatabase().query(ScoreContract.ScoreTable.TABLE_NAME,
                 QUERY_PROJECTION, null, null, null, null, ORDER, LIMIT);
-        cursor.close();
         // 1 -> ID, 2 -> DATE, 3 -> VALUE
-        Score score;
         for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext())
-            result.add(new Score(cursor.getInt(3), new Date(cursor.getLong(2))));
+            result.add(new Score(
+                    cursor.getInt(cursor.getColumnIndex(ScoreContract.ScoreTable.COLUMN_VALUE)),
+                    new Date(cursor.getLong(cursor.getColumnIndex(ScoreContract.ScoreTable.COLUMN_DATE)))
+            ));
+        cursor.close();
         return result;
     }
 

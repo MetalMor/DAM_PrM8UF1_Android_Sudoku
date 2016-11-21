@@ -14,11 +14,10 @@ import edu.fje.clot.sudoku.scores.mask.Scores;
 import edu.fje.clot.sudoku.scores.mask.ScoresDb;
 
 public class MainActivity extends Activity implements View.OnClickListener {
-    private Button btnPlay;
     IScores Puntuacions;
     private ListView ScoreWins;
     ScoreAdapter adapter;
-    int[] imatges= {
+    int[] imatges = {
             R.drawable.medallaor,
             R.drawable.medallaplata,
             R.drawable.medallabronze,
@@ -28,12 +27,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnPlay = (Button) findViewById(R.id.play);
-        btnPlay.setOnClickListener( this);
+        findViewById(R.id.play).setOnClickListener(this);
 
-        ScoreWins = (ListView) findViewById(R.id.LlistaPuntuacions);
-        //Puntuacions = new ScoresDb(getApplicationContext());
-        Puntuacions = new Scores();
+        Puntuacions = new ScoresDb(getApplicationContext());
+        //Puntuacions = new Scores();
 
         final ListView Llista = (ListView) findViewById(R.id.LlistaPuntuacions);
         adapter = new ScoreAdapter(this, Puntuacions, imatges);
