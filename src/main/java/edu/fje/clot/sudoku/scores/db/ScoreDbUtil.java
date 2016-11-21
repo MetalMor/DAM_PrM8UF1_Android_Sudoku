@@ -103,7 +103,7 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("DROP TABLE " + ScoreContract.ScoreTable.TABLE_NAME);
+        //sqLiteDatabase.execSQL("DROP TABLE " + ScoreContract.ScoreTable.TABLE_NAME);
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE);
     }
 
