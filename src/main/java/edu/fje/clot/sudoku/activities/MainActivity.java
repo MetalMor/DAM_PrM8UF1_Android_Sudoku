@@ -29,12 +29,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         findViewById(R.id.play).setOnClickListener(this);
 
-        Puntuacions = new ScoresDb(getApplicationContext());
-        //Puntuacions = new Scores();
+        //Puntuacions = new ScoresDb(getApplicationContext());
+        Puntuacions = new Scores();
 
-        final ListView Llista = (ListView) findViewById(R.id.LlistaPuntuacions);
         adapter = new ScoreAdapter(this, Puntuacions, imatges);
-        Llista.setAdapter(adapter);
+        ((ListView) findViewById(R.id.LlistaPuntuacions)).setAdapter(adapter);
 
     }
     public void onClick(View arg0) {

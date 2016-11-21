@@ -34,6 +34,8 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
             ScoreContract.ScoreTable.COLUMN_DATE + " LONG DEFAULT 0, " +
             ScoreContract.ScoreTable.COLUMN_VALUE + " INTEGER DEFAULT 0)";
     private static final String SQL_DROP_TABLE_IF_EXISTS = "DROP TABLE IF EXISTS " + ScoreContract.ScoreTable.TABLE_NAME;
+    private static final String SQL_QUERY_ALL = "SELECT * FROM SCORE";
+    private static final String SQL_QUERY_SINGLE = SQL_QUERY_ALL + " WHERE _ID=?";
 
     public ScoreDbUtil(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
