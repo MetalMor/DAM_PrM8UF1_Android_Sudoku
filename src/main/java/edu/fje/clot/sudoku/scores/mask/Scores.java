@@ -1,5 +1,7 @@
 package edu.fje.clot.sudoku.scores.mask;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.GregorianCalendar;
@@ -29,6 +31,7 @@ public class Scores implements IScores {
         date.set(2016,10,10,11,10,0);
         list.add(new Score(700, date.getTime()));
     }
+    public Scores(Context context) { this(); }
 
     public List<Score> getTop(int n){
         Collections.sort(list);

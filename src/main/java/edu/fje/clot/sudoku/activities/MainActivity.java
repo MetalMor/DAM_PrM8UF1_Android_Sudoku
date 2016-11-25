@@ -16,7 +16,6 @@ import edu.fje.clot.sudoku.scores.mask.ScoresDb;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     IScores Puntuacions;
-    private ListView ScoreWins;
     ScoreAdapter adapter;
     ImageView helpimg;
     int[] imatges = {
@@ -31,8 +30,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         findViewById(R.id.play).setOnClickListener(this);
 
-        //Puntuacions = new ScoresDb(getApplicationContext());
-        Puntuacions = new Scores();
+        Puntuacions = new Scores(getApplicationContext());
+        //Puntuacions = new Scores();
 
         adapter = new ScoreAdapter(this, Puntuacions, imatges);
         ((ListView) findViewById(R.id.LlistaPuntuacions)).setAdapter(adapter);
