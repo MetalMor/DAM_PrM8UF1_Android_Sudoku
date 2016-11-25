@@ -8,7 +8,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import edu.fje.clot.sudoku.scores.Score;
-import edu.fje.clot.sudoku.scores.mask.IScores;
 
 /**
  * Created by oriol on 11/8/16.
@@ -17,39 +16,39 @@ import edu.fje.clot.sudoku.scores.mask.IScores;
 
 public class Scores implements IScores {
 
-    private List<Score> list = new ArrayList<>();
+    private List<Score> _list = new ArrayList<>();
 
     public Scores(){
         //De momento nos las inventamos
         GregorianCalendar date = new GregorianCalendar();
         date.set(2016,10,20,12,30,0);
-        list.add(new Score(0, 1000, date.getTime()));
+        getList().add(new Score(0, 1000, date.getTime()));
         date.set(2016,9,30,11,30,0);
-        list.add(new Score(1, 1500, date.getTime()));
+        getList().add(new Score(1, 1500, date.getTime()));
         date.set(2016,8,20,12,30,0);
-        list.add(new Score(2, 400, date.getTime()));
+        getList().add(new Score(2, 400, date.getTime()));
         date.set(2016,10,10,11,10,0);
-        list.add(new Score(3, 700, date.getTime()));
+        getList().add(new Score(3, 700, date.getTime()));
     }
     public Scores(Context context) { this(); }
 
     public List<Score> getTop(int n){
-        Collections.sort(list);
-        return list.subList(0, n);
+        Collections.sort(_list);
+        return _list.subList(0, n);
     }
-    public Score getAnOrdenadeIndexTop(int n){
-        Collections.sort(list);
-        return list.get(n);
+    public Score getItem(int n){
+        Collections.sort(_list);
+        return _list.get(n);
     }
-    public int NumerodePuntuacions(){
-
-        return list.size();
+    public int count(){
+        return _list.size();
     }
     public List<Score> getList() {
-        return list;
+        if(_list == null) _list = new ArrayList<>();
+        return _list;
     }
 
     public void setList(ArrayList<Score> list) {
-        this.list = list;
+        this._list = list;
     }
 }

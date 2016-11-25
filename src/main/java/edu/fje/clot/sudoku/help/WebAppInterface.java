@@ -1,4 +1,4 @@
-package edu.fje.clot.sudoku.Help;
+package edu.fje.clot.sudoku.help;
 
 import android.content.Context;
 import android.webkit.JavascriptInterface;

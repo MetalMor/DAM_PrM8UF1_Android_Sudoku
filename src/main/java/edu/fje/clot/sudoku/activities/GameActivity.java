@@ -22,12 +22,13 @@ import edu.fje.clot.sudoku.matrix.SudokuAdapter;
 public class GameActivity extends Activity implements View.OnClickListener {
     int[][] SudokuSolution;
     int[][] EmptySudoku;
-    GridView   Grid;
+    private int[] possibleSudokuId = { R.array.matrix_1/*, R.array.matrix_2, R.array.matrix_3*/ };
+    GridView Grid;
     SudokuAdapter customAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SudokuSolution = Sudoku.ConvertoTwoDimension(getResources().getIntArray(R.array.matrix_1));
+        SudokuSolution = Sudoku.ConvertoTwoDimension(randomSudoku());
         EmptySudoku = Sudoku.getInstance().ClearSudoku(SudokuSolution, 56);
         setContentView(R.layout.activity_game);
 
@@ -35,6 +36,12 @@ public class GameActivity extends Activity implements View.OnClickListener {
         Grid = (GridView) findViewById(R.id.Graella);
         customAdapter = new SudokuAdapter(getApplicationContext(),OnedimensionSudoku);
         Grid.setAdapter(customAdapter);
+    }
+
+    private int[] randomSudoku() {
+        return getResources().getIntArray(
+                possibleSudokuId[((int) Math.random())*possibleSudokuId.length]
+        );
     }
 
 

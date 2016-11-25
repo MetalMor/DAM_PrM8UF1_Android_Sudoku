@@ -1,7 +1,6 @@
 package edu.fje.clot.sudoku.scores.mask;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -9,7 +8,6 @@ import java.util.List;
 
 import edu.fje.clot.sudoku.scores.Score;
 import edu.fje.clot.sudoku.scores.db.ScoreDbUtil;
-import edu.fje.clot.sudoku.scores.mask.IScores;
 
 /**
  * Created by m0R on 11/21/16.
@@ -23,7 +21,7 @@ public class ScoresDb implements IScores {
 
     public ScoresDb(Context context){
         setTable(new ScoreDbUtil(context));
-        if(NumerodePuntuacions() <= 0) {
+        if(count() <= 0) {
             List<Score> list = new ArrayList<>();
             //De momento nos las inventamos
             GregorianCalendar date = new GregorianCalendar();
@@ -42,16 +40,17 @@ public class ScoresDb implements IScores {
     public List<Score> getTop(int n){
         return getTable().findTop(n);
     }
-    public Score getAnOrdenadeIndexTop(int n){
+    public Score getItem(int n){
         return getList().get(n);
     }
-    public int NumerodePuntuacions(){
-
+    public int count() {
         return getTable().count();
     }
     public List<Score> getList() {
-        if (_list == null || _list.isEmpty() )
-            setList(getTable().findAll());
+        boolean updateRequired = _list == null ||
+                        _list.isEmpty() ||
+                        getTable().count() != getList().size();
+        if (updateRequired) setList(getTable().findAll());
         return _list;
     }
     public void setList(List<Score> list) { _list = list; }
