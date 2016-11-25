@@ -12,7 +12,7 @@ import edu.fje.clot.sudoku.scores.Score;
 
 public interface IScores {
     public List<Score> getTop(int n);
-    public Score getAnOrdenadeIndexTop(int n);
-    public int NumerodePuntuacions();
+    public Score getItem(int n);
+    public int count();
     public List<Score> getList();
 }

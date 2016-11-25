@@ -32,7 +32,7 @@ public class ScoreAdapter extends BaseAdapter{
     }
 
     public int getCount() {
-        return Puntuacions.NumerodePuntuacions();
+        return Puntuacions.count();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class ScoreAdapter extends BaseAdapter{
         txtScore = (TextView) itemView.findViewById(R.id.item_score);
         txtDate = (TextView) itemView.findViewById(R.id.item_date);
         imgImg = (ImageView) itemView.findViewById(R.id.item_image);
-        Score puntuacio =Puntuacions.getAnOrdenadeIndexTop(position);
+        Score puntuacio =Puntuacions.getItem(position);
         // Capture position and set to the TextViews
         int punts=puntuacio.getValue();
         txtScore.setText(Integer.toString(punts));
