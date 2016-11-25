@@ -49,7 +49,7 @@ public class ScoresDb implements IScores {
     public List<Score> getList() {
         boolean updateRequired = _list == null ||
                         _list.isEmpty() ||
-                        getTable().count() != getList().size();
+                        getTable().count() != _list.size();
         if (updateRequired) setList(getTable().findAll());
         return _list;
     }
