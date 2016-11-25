@@ -38,9 +38,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
         ((ListView) findViewById(R.id.LlistaPuntuacions)).setAdapter(adapter);
         helpimg = (ImageView) findViewById(R.id.imageView2);
         helpimg.setImageResource(R.drawable.help);
+        findViewById(R.id.imageView2).setOnClickListener(this);
+
     }
     public void onClick(View arg0) {
-        Intent intent = new Intent(this, GameActivity.class);
-        startActivity(intent);
+        switch(arg0.getId()){
+
+            case R.id.play: /** Start a new Activity MyCards.java */
+                Intent intent = new Intent(this, GameActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.imageView2 :/** AlerDialog when click on Exit */
+                Intent intent2 = new Intent(this, HelpActivity.class);
+                startActivity(intent2);
+                break;
+        }
+
     }
 }

@@ -22,8 +22,12 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustPan"
             android:label="@string/gamename" >
-
-
+        </activity>
+        <activity
+            android:name="edu.fje.clot.sudoku.activities.HelpActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustPan"
+            android:label="@string/gamename" >
         </activity>
     </application>
 
