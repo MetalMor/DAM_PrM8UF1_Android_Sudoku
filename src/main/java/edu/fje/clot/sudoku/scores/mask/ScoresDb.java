@@ -1,6 +1,7 @@
 package edu.fje.clot.sudoku.scores.mask;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -17,38 +18,46 @@ import edu.fje.clot.sudoku.scores.mask.IScores;
 
 public class ScoresDb implements IScores {
 
-    private ScoreDbUtil scoreTable;
+    private ScoreDbUtil _table;
+    private List<Score> _list;
 
     public ScoresDb(Context context){
-        scoreTable = new ScoreDbUtil(context);
-        if(scoreTable.count() == 0) {
+        setTable(new ScoreDbUtil(context));
+        if(NumerodePuntuacions() <= 0) {
             List<Score> list = new ArrayList<>();
             //De momento nos las inventamos
             GregorianCalendar date = new GregorianCalendar();
             date.set(2016, 10, 20, 12, 30, 0);
-            list.add(new Score(1000, date.getTime()));
-            date.set(2016, 9, 30, 11, 30, 0);
-            list.add(new Score(1500, date.getTime()));
-            date.set(2016, 8, 20, 12, 30, 0);
-            list.add(new Score(400, date.getTime()));
-            date.set(2016, 10, 10, 11, 10, 0);
-            list.add(new Score(700, date.getTime()));
-            scoreTable.insertAll(list);
+            list.add(new Score(0, 1000, date.getTime()));
+            date.set(2016,9,30,11,30,0);
+            list.add(new Score(1, 1500, date.getTime()));
+            date.set(2016,8,20,12,30,0);
+            list.add(new Score(2, 400, date.getTime()));
+            date.set(2016,10,10,11,10,0);
+            list.add(new Score(3, 700, date.getTime()));
+            getTable().insertAll(list);
         }
     }
 
     public List<Score> getTop(int n){
-        return scoreTable.findTop(n);
+        return getTable().findTop(n);
     }
     public Score getAnOrdenadeIndexTop(int n){
-        return scoreTable.find(n);
+        return getList().get(n);
     }
     public int NumerodePuntuacions(){
 
-        return scoreTable.count();
+        return getTable().count();
     }
     public List<Score> getList() {
-        return scoreTable.findAll();
+        if (_list == null || _list.isEmpty() )
+            setList(getTable().findAll());
+        return _list;
     }
+    public void setList(List<Score> list) { _list = list; }
+
+    public ScoreDbUtil getTable() { return _table; }
+    private void setTable(ScoreDbUtil table) { _table = table; }
+
 
 }

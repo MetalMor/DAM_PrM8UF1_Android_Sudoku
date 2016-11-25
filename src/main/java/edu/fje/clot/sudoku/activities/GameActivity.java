@@ -46,8 +46,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
-
-            outState.putInt("gridView" ,Grid.getId());
+        outState.putInt("gridView" ,Grid.getId());
     }
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {

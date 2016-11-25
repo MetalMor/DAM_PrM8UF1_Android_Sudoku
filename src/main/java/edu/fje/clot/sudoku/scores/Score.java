@@ -1,5 +1,7 @@
 package edu.fje.clot.sudoku.scores;
 
+import android.support.annotation.NonNull;
+
 import java.util.Date;
 
 /**
@@ -8,32 +10,43 @@ import java.util.Date;
 
 public class Score implements Comparable<Score> {
 
-    private int value;
-    private Date date=new Date();
+    private int _id;
+    private int _value;
+    private Date _date=new Date();
 
-    public Score(int value, Date date){
-        this.value = value;
-        this.date = date;
+    private Score() { }
+    private Score(int id) {
+        this();
+        setId(id);
+    }
+    public Score(int id, int value, Date date) {
+        this(id);
+        setValue(value);
+        setDate(date);
     }
 
     @Override
-    public int compareTo(Score score) {
-       return score.value - this.value;
+    public int compareTo(@NonNull Score score) {
+       return score.getValue() - getValue();
     }
 
     public int getValue() {
-        return value;
+        return _value;
     }
 
     public void setValue(int value) {
-        this.value = value;
+        this._value = value;
     }
 
     public Date getDate() {
-        return date;
+        return _date;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this._date = date;
     }
+
+    public int getId() { return _id; }
+
+    public void setId(int id) { _id = id; }
 }

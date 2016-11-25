@@ -7,11 +7,12 @@ import android.provider.BaseColumns;
  */
 
 final class ScoreContract {
-    public static abstract class ScoreTable implements BaseColumns {
-        public static final String TABLE_NAME = "SCORE";
-        public static final String COLUMN_DATE = "DATE";
-        public static final String COLUMN_VALUE = "VALUE";
-        public static final String COLUMN_NULL = "NULL";
-        public static final String COUNT = "COUNT(*)";
+    static abstract class ScoreTable implements BaseColumns {
+        static final String TABLE_NAME = "SCORE";
+        static final String COLUMN_ID = "_ID";
+        static final String COLUMN_DATE = "DATE";
+        static final String COLUMN_VALUE = "VALUE";
+        static final String COLUMN_NULL = "NULL";
+        static final String COUNT = "COUNT(*)";
     }
 }
