@@ -28,7 +28,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SudokuSolution = Sudoku.ConvertoTwoDimension(getResources().getIntArray(R.array.matrix_1));
-        EmptySudoku = Sudoku.getInstance().ClearSudoku(SudokuSolution, 56);
+        EmptySudoku = Sudoku.getInstance().ClearSudoku(SudokuSolution, 50);
         setContentView(R.layout.activity_game);
 
         final int[] OnedimensionSudoku =Sudoku.ConvertoOneDimension(EmptySudoku);

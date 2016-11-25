@@ -40,7 +40,7 @@ public class HelpActivity extends Activity implements View.OnClickListener {
         //per defecte ens obrirà Chrome, cal canviar-ho
         navegador.setWebViewClient(new WebViewClient());
         //navegador.loadUrl("http://www.fje.edu/");
-        navegador.loadData("<html><body>hola, mon!</body></html>", "text/html", "UTF-8");
+        //navegador.loadData("<html><body>hola, mon!</body></html>", "text/html", "UTF-8");
 //        navegador.loadData("<html><body><input type=\"button\" value=\"Hola\" onClick=\"mostrarToast('Hola Android!')\" />\n" +
 //                "<script type=\"text/javascript\">\n" +
 //                "function mostrarToast(toast) {\n" +
@@ -48,7 +48,7 @@ public class HelpActivity extends Activity implements View.OnClickListener {
 //                "}\n" +
 //                "</script></body></html>", "text/html", "UTF-8");
 //       navegador.addJavascriptInterface (new WebAppInterface (this), "Android");
-        //navegador.loadUrl("file:///android_asset/html5_geolocalizacion4.html");
+        navegador.loadUrl("file:///android_asset/WebHelp/index.html");
 
     }
 
