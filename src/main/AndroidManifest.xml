@@ -3,6 +3,7 @@
     package="edu.fje.clot.sudoku">
 
     <application
+        android:name=".globals.SudokuApplication"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

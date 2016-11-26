@@ -13,11 +13,18 @@ public class Score implements Comparable<Score> {
     private int _id;
     private int _value;
     private Date _date=new Date();
-
-    private Score() { }
+    private static int last_id;
+    public Score() {
+        int id=last_id+1;
+        setId(id);
+        last_id= id;
+        setValue(0);
+        setDate(new Date());
+    }
     private Score(int id) {
         this();
         setId(id);
+        last_id= id;
     }
     public Score(int id, int value, Date date) {
         this(id);
@@ -37,6 +44,8 @@ public class Score implements Comparable<Score> {
     public void setValue(int value) {
         this._value = value;
     }
+
+    public void ValueIncrement(int increment){ this._value+=increment;}
 
     public Date getDate() {
         return _date;

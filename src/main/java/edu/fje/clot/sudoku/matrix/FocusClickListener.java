@@ -1,5 +1,8 @@
 package edu.fje.clot.sudoku.matrix;
 
+import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +14,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import edu.fje.clot.sudoku.R;
+import edu.fje.clot.sudoku.globals.SudokuApplication;
+import edu.fje.clot.sudoku.scores.Score;
 
 import static android.content.ContentValues.TAG;
 
@@ -35,7 +40,7 @@ public class FocusClickListener {
      return rel2;
  }
 
-    public static void PaintPosition(View v, final RelativeLayout rel,boolean listener ){
+    public static void PaintPosition(View v, final RelativeLayout rel,boolean listener,Context context ){
 
         final String text=TextContent(v);
         final int position = v.getId();
@@ -64,7 +69,7 @@ public class FocusClickListener {
             rel2.setBackgroundResource(R.drawable.cell_shape_focused);
             if (rel.getChildAt(0) instanceof EditText)
 
-               if(listener) ErrorPaintListener( v, (EditText) rel.getChildAt(0), rel, rel2,text);
+               if(listener) ErrorPaintListener( v, (EditText) rel.getChildAt(0), rel, rel2,text,context );
 
             Errorspainting(rel, rel2, text,i==position);
 
@@ -75,7 +80,7 @@ public class FocusClickListener {
             //EditText edtxt= (EditText) v.findViewById(R.id.SudokuVariableNumber);
             //  edtxt.setBackgroundColor(Color.GREEN);
             if (rel.getChildAt(0) instanceof EditText)
-                if(listener)   ErrorPaintListener( v, (EditText) rel.getChildAt(0), rel, rel2,text);
+                if(listener)   ErrorPaintListener( v, (EditText) rel.getChildAt(0), rel, rel2,text,context );
             Errorspainting(rel, rel2, text,i==position);
         }
         //int x=(position+1)/3;
@@ -89,7 +94,7 @@ public class FocusClickListener {
 
                 final RelativeLayout rel2 = GetRelativeLayoutFromGrid(rel,i);
                 if (rel.getChildAt(0) instanceof EditText)
-                    if(listener)    ErrorPaintListener( v, (EditText) rel.getChildAt(0), rel, rel2,text);
+                    if(listener)    ErrorPaintListener( v, (EditText) rel.getChildAt(0), rel, rel2,text,context );
                 Errorspainting(rel, rel2, text,i==position );
             }
         }
@@ -99,23 +104,47 @@ public class FocusClickListener {
 
 
 
-    public static void FocusMaker(View v, final RelativeLayout rel){
+    public static void FocusMaker(View v, final RelativeLayout rel,final Context context){
 
         v.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    PaintPosition(v,rel, true);
+                    PaintPosition(v,rel, true,context);
                 }else{
 
                     // RelativeLayout rel = (RelativeLayout) v.findViewById(R.id.EmptyCell);
                     rel.setBackgroundResource(R.drawable.cell_shape);
 
                 }
+
             }});
 
     }
 
+private static void SumaPuntuacio(View v, Context context, RelativeLayout rel){
 
+
+     SudokuApplication GlobalVar = (SudokuApplication) context;
+    int position = v.getId();
+        int[] solution = GlobalVar.getSolution();
+
+     Score score = GlobalVar.getPuntuaciopartida();
+    if (TextContent(v).equals(Integer.toString(solution[position])) ){
+     score.ValueIncrement(40);Log.v("Suma","+60" );}
+        else{
+            score.ValueIncrement(-5);   Log.v("Resta","-5" ); }
+     GlobalVar.setPuntuaciopartida(score);
+     Log.v("TextContent",TextContent(v) );
+    Log.v("Solucio",Integer.toString(solution[position]) );
+     Application application = (Application)SudokuApplication.getContext();
+     SudokuApplication app = (SudokuApplication)application;
+     View parent = app.getRootview();
+     TextView textView  = (TextView) parent.findViewById(R.id.TxtVScore);
+     textView.setText(Integer.toString(app.getPuntuaciopartida().getValue()));
+
+
+
+ }
 
     private static void Errorspainting(final RelativeLayout rel,final RelativeLayout rel2,final String text, boolean Mateixacasella) {
         if (rel2.getChildAt(0) instanceof EditText) {
@@ -128,6 +157,7 @@ public class FocusClickListener {
                 if (text2.equals(text) && (!text2.equals("")) && (!Mateixacasella)) {
                     ((TextView) rel.getChildAt(0)).setTextColor(Color.RED);
                     rel2.setBackgroundResource(R.drawable.cell_shape_warning);
+
 
                 }
             }
@@ -153,7 +183,7 @@ public class FocusClickListener {
         }
     }
 
-    public static void ErrorPaintListener(final View v,final EditText edtxt, final RelativeLayout rel, final RelativeLayout rel2, final String text) {
+    public static void ErrorPaintListener(final View v, final EditText edtxt, final RelativeLayout rel, final RelativeLayout rel2, final String text, final Context context) {
 
         edtxt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -161,9 +191,9 @@ public class FocusClickListener {
                 boolean mateixacela=(rel2.getChildAt(0)==edtxt);
 
 
-                PaintPosition(v,rel, false);
+                PaintPosition(v,rel, false,context);
                 Errorspainting(rel, rel2,s.toString(),mateixacela);
-
+                SumaPuntuacio(v,context,rel);
 
             }
 

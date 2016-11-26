@@ -21,6 +21,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import edu.fje.clot.sudoku.R;
+import edu.fje.clot.sudoku.globals.SudokuApplication;
+import edu.fje.clot.sudoku.scores.Score;
 
 
 public class SudokuAdapter extends BaseAdapter {
@@ -32,6 +34,8 @@ public class SudokuAdapter extends BaseAdapter {
         this.context = applicationContext;
         this.sudoku1dimension = sudoku1dimension;
         inflter = (LayoutInflater.from(applicationContext));
+
+
     }
 
     @Override
@@ -55,6 +59,9 @@ public class SudokuAdapter extends BaseAdapter {
 
 
 
+
+
+
             if (sudoku1dimension[i]==0){
 
                 view = inflter.inflate(R.layout.emptycell, null);
@@ -62,7 +69,7 @@ public class SudokuAdapter extends BaseAdapter {
                 final RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.EmptyCell);
 
              edtxt.setId(i);
-                FocusClickListener.FocusMaker(edtxt,rel );
+                FocusClickListener.FocusMaker(edtxt,rel,context );
               //  FocusClickListener.ErrorPaintListener( (EditText) rel.getChildAt(0), rel, rel2,text);
 
             }else {
@@ -72,7 +79,7 @@ public class SudokuAdapter extends BaseAdapter {
                 txtview.setId(i);
                 final RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.FilledCell);
 
-                FocusClickListener.FocusMaker(txtview,rel );
+                FocusClickListener.FocusMaker(txtview,rel,context);
 
             }
 

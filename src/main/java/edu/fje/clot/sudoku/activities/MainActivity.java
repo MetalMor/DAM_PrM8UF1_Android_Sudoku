@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import edu.fje.clot.sudoku.R;
 import edu.fje.clot.sudoku.scores.mask.IScores;
@@ -36,6 +37,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         helpimg = (ImageView) findViewById(R.id.imageView2);
         helpimg.setImageResource(R.drawable.help);
         findViewById(R.id.imageView2).setOnClickListener(this);
+
+
 
     }
     public void onClick(View arg0) {
