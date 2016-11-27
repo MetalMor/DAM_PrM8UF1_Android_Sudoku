@@ -1,6 +1,5 @@
 package edu.fje.clot.sudoku.matrix;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Color;
@@ -16,8 +15,6 @@ import android.widget.TextView;
 import edu.fje.clot.sudoku.R;
 import edu.fje.clot.sudoku.globals.SudokuApplication;
 import edu.fje.clot.sudoku.scores.Score;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by oriol on 11/19/16.
@@ -55,7 +52,10 @@ public class FocusClickListener {
         }
         for(int i=0; i<81; i++) {
             RelativeLayout rel2 = (RelativeLayout) ((ViewGroup) rel.getParent()).getChildAt(i);
+            int Q=((((i)/3)%3)+1)+3*(((i/9)/3)+1);
+            if (Q%2==1)
             rel2.setBackgroundResource(R.drawable.cell_shape);
+            else rel2.setBackgroundResource(R.drawable.cell_shapeblue);
             if (rel2.getChildAt(0) instanceof TextView){
                   ((TextView) rel2.getChildAt(0)).setTextColor(Color.BLACK);
             }
