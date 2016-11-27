@@ -140,7 +140,7 @@ private static void SumaPuntuacio(View v, Context context, RelativeLayout rel){
      SudokuApplication app = (SudokuApplication)application;
      View parent = app.getRootview();
      TextView textView  = (TextView) parent.findViewById(R.id.TxtVScore);
-     textView.setText(Integer.toString(app.getPuntuaciopartida().getValue()));
+     textView.setText("Punts: " + Integer.toString(app.getPuntuaciopartida().getValue()));
 
 
 

@@ -21,6 +21,10 @@ import edu.fje.clot.sudoku.matrix.Sudoku;
 
 import edu.fje.clot.sudoku.matrix.SudokuAdapter;
 import edu.fje.clot.sudoku.scores.Score;
+import edu.fje.clot.sudoku.scores.db.ScoreDbUtil;
+import edu.fje.clot.sudoku.scores.mask.ScoresDb;
+
+import static android.R.id.list;
 
 /**
  * Created by oriol on 11/12/16.
@@ -59,7 +63,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
         new ScoreUpdate(this, this.findViewById(R.id.activity_game)).execute();
 
 
-
+       // GlobalVar.getPuntuaciopartida();
 
     }
 
@@ -88,5 +92,14 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
         int viewId = savedInstanceState.getInt("gridView");
         Grid.setId(viewId);
+    }
+
+    public void onDestroy() {
+        ScoreDbUtil Dbutils = new ScoreDbUtil(this);
+        Dbutils.insert(GlobalVar.getPuntuaciopartida());
+
+        //
+        super.onDestroy();
+
     }
 }
