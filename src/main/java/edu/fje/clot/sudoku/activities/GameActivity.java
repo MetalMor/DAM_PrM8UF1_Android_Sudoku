@@ -1,9 +1,15 @@
 package edu.fje.clot.sudoku.activities;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.ContentValues;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +17,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
@@ -35,35 +42,36 @@ public class GameActivity extends Activity implements View.OnClickListener {
     int[][] EmptySudoku;
 
 
-    private int[] possibleSudokuId = { R.array.matrix_1, R.array.matrix_2, R.array.matrix_3 };
+    private int[] possibleSudokuId = {R.array.matrix_1, R.array.matrix_2, R.array.matrix_3};
     GridView Grid;
     SudokuAdapter customAdapter;
-    TextView textView ;
+    TextView textView;
     SudokuApplication GlobalVar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        int[] SudokuSolutionOnedimension= randomSudoku();
+        int[] SudokuSolutionOnedimension = randomSudoku();
         SudokuSolution = Sudoku.ConvertoTwoDimension(SudokuSolutionOnedimension);
         EmptySudoku = Sudoku.getInstance().ClearSudoku(SudokuSolution, 50);
         setContentView(R.layout.activity_game);
-        textView=  (TextView) findViewById(R.id.TxtVScore);
+        textView = (TextView) findViewById(R.id.TxtVScore);
         GlobalVar = (SudokuApplication) getApplicationContext();
         GlobalVar.setPuntuaciopartida(Score.newScore(getApplicationContext()));
         GlobalVar.setSolution(SudokuSolutionOnedimension);
         GlobalVar.setRootview(findViewById(android.R.id.content));
 
-        final int[] OnedimensionSudoku =Sudoku.ConvertoOneDimension(EmptySudoku);
+        final int[] OnedimensionSudoku = Sudoku.ConvertoOneDimension(EmptySudoku);
         Grid = (GridView) findViewById(R.id.Graella);
-        customAdapter = new SudokuAdapter(getApplicationContext(),OnedimensionSudoku );
+        customAdapter = new SudokuAdapter(getApplicationContext(), OnedimensionSudoku);
         Grid.setAdapter(customAdapter);
 
 
         new ScoreUpdate(this, this.findViewById(R.id.activity_game)).execute();
 
 
-       // GlobalVar.getPuntuaciopartida();
+        // GlobalVar.getPuntuaciopartida();
 
     }
 
@@ -71,7 +79,8 @@ public class GameActivity extends Activity implements View.OnClickListener {
        Random rand = new Random();
         return getResources().getIntArray(
                 possibleSudokuId[(rand.nextInt(possibleSudokuId.length))
-                        ]);}
+                        ]);
+    }
 
 
 
