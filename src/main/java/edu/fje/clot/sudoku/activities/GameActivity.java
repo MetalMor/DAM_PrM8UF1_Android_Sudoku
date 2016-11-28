@@ -106,7 +106,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
     public void onDestroy() {
         ScoreDbUtil Dbutils = new ScoreDbUtil(this);
         Dbutils.insert(GlobalVar.getPuntuaciopartida());
-
+       // Dbutils.insertToCalendar(GlobalVar.getPuntuaciopartida());
         //
         super.onDestroy();
 
