@@ -130,9 +130,9 @@ private static void SumaPuntuacio(View v, Context context, RelativeLayout rel){
 
      Score score = GlobalVar.getPuntuaciopartida();
     if (TextContent(v).equals(Integer.toString(solution[position])) ){
-     score.ValueIncrement(40);Log.i("Suma","+60" );}
+     score.ValueIncrement(10);Log.i("Suma","+60" );}
         else{
-            score.ValueIncrement(-5);   Log.i("Resta","-5" ); }
+            score.ValueIncrement(-1);   Log.i("Resta","-5" ); }
      GlobalVar.setPuntuaciopartida(score);
      Log.i("TextContent",TextContent(v) );
     Log.i("Solucio",Integer.toString(solution[position]) );

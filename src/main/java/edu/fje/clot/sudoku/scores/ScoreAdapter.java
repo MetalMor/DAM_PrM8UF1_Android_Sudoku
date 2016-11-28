@@ -20,6 +20,8 @@ import edu.fje.clot.sudoku.scores.mask.IScores;
 
 public class ScoreAdapter extends BaseAdapter{
     // Declare Variables
+    // TODO: funciones de insertar elementos. usar notificaciones del adapter
+    // no deberian meterse elementos en la lista sino a traves del inflater
     private Context context;
     private IScores Puntuacions;
     private int[] imatges;
@@ -68,7 +70,7 @@ public class ScoreAdapter extends BaseAdapter{
         SimpleDateFormat formatdata = new SimpleDateFormat("dd-MM-yyyy");
         txtDate.setText(formatdata.format(puntuacio.getDate()));
         if(position<3) imgImg.setImageResource(imatges[position]);
-
+        notifyDataSetChanged();
         return itemView;
     }
 }

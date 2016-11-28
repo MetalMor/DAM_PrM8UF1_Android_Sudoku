@@ -48,11 +48,6 @@ public class SudokuAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-
-
-
-
-
             if (sudoku1dimension[i]==0){
 
                 view = inflter.inflate(R.layout.emptycell, null);
