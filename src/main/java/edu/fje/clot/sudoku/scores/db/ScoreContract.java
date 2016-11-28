@@ -9,7 +9,6 @@ import android.provider.BaseColumns;
 final class ScoreContract {
     static abstract class ScoreTable implements BaseColumns {
         static final String TABLE_NAME = "SCORE";
-        static final String COLUMN_ID = "_ID";
         static final String COLUMN_DATE = "DATE";
         static final String COLUMN_VALUE = "VALUE";
         static final String COLUMN_NULL = "NULL";

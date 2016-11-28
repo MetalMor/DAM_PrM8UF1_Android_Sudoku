@@ -53,7 +53,9 @@ public class SudokuAdapter extends BaseAdapter {
                 view = inflter.inflate(R.layout.emptycell, null);
                 final EditText edtxt = (EditText) view.findViewById(R.id.SudokuVariableNumber);
                 final RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.EmptyCell);
-
+                int Q=((((i)/3)%3)+1)+3*(((i/9)/3)+1);
+                if (Q%2==0)
+                   rel.setBackgroundResource(R.drawable.cell_shapeblue);
              edtxt.setId(i);
                 Util.FocusMaker(edtxt,rel,context );
               //  Util.ErrorPaintListener( (EditText) rel.getChildAt(0), rel, rel2,text);
@@ -64,7 +66,9 @@ public class SudokuAdapter extends BaseAdapter {
                 txtview.setText(Integer.toString(sudoku1dimension[i]));
                 txtview.setId(i);
                 final RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.FilledCell);
-
+                int Q=((((i)/3)%3)+1)+3*(((i/9)/3)+1);
+                if (Q%2==0)
+                    rel.setBackgroundResource(R.drawable.cell_shapeblue);
                 Util.FocusMaker(txtview,rel,context);
 
             }
