@@ -20,7 +20,7 @@ import edu.fje.clot.sudoku.scores.Score;
  * Created by oriol on 11/19/16.
  */
 
-public class FocusClickListener {
+public class Util {
         public static String TextContent(View v){
             String text="";
             if (v instanceof EditText)
@@ -130,12 +130,12 @@ private static void SumaPuntuacio(View v, Context context, RelativeLayout rel){
 
      Score score = GlobalVar.getPuntuaciopartida();
     if (TextContent(v).equals(Integer.toString(solution[position])) ){
-     score.ValueIncrement(40);Log.v("Suma","+60" );}
+     score.ValueIncrement(40);Log.i("Suma","+60" );}
         else{
-            score.ValueIncrement(-5);   Log.v("Resta","-5" ); }
+            score.ValueIncrement(-5);   Log.i("Resta","-5" ); }
      GlobalVar.setPuntuaciopartida(score);
-     Log.v("TextContent",TextContent(v) );
-    Log.v("Solucio",Integer.toString(solution[position]) );
+     Log.i("TextContent",TextContent(v) );
+    Log.i("Solucio",Integer.toString(solution[position]) );
      Application application = (Application)SudokuApplication.getContext();
      SudokuApplication app = (SudokuApplication)application;
      View parent = app.getRootview();

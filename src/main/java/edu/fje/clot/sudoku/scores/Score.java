@@ -1,8 +1,11 @@
 package edu.fje.clot.sudoku.scores;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import java.util.Date;
+
+import edu.fje.clot.sudoku.scores.db.ScoreDbUtil;
 
 /**
  * Created by oriol on 11/8/16.
@@ -13,23 +16,22 @@ public class Score implements Comparable<Score> {
     private int _id;
     private int _value;
     private Date _date=new Date();
-    private static int last_id;
-    public Score() {
-        int id=last_id+1;
-        setId(id);
-        last_id= id;
-        setValue(0);
-        setDate(new Date());
+    public Score() { }
+    private Score(Context context) {
+        setId(getNewId(context));
     }
     private Score(int id) {
         this();
         setId(id);
-        last_id= id;
     }
     public Score(int id, int value, Date date) {
         this(id);
         setValue(value);
         setDate(date);
+    }
+
+    public static Score newScore(Context context) {
+        return new Score(context);
     }
 
     @Override
@@ -58,4 +60,9 @@ public class Score implements Comparable<Score> {
     public int getId() { return _id; }
 
     public void setId(int id) { _id = id; }
+
+    private static int getNewId(Context context) {
+        ScoreDbUtil scoreTable = new ScoreDbUtil(context);
+        return scoreTable.findMaxId()+1;
+    }
 }

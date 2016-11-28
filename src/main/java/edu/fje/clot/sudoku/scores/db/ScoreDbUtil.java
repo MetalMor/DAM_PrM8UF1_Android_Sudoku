@@ -28,6 +28,7 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
             ScoreContract.ScoreTable.COLUMN_VALUE
     };
     private static final String[] QUERY_COUNT = { ScoreContract.ScoreTable.COUNT };
+    private static final String[] QUERY_MAX_ID = { ScoreContract.ScoreTable.MAX_ID };
     private static final String BY_ID = ScoreContract.ScoreTable._ID + "=?";
 
     private static final String SQL_CREATE_TABLE = "CREATE TABLE " +
@@ -36,8 +37,6 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
             ScoreContract.ScoreTable.COLUMN_DATE + " LONG DEFAULT 0, " +
             ScoreContract.ScoreTable.COLUMN_VALUE + " INTEGER DEFAULT 0)";
     private static final String SQL_DROP_TABLE_IF_EXISTS = "DROP TABLE IF EXISTS " + ScoreContract.ScoreTable.TABLE_NAME;
-    private static final String SQL_QUERY_ALL = "SELECT * FROM SCORE";
-    private static final String SQL_QUERY_SINGLE = SQL_QUERY_ALL + " WHERE _ID=?";
 
     public ScoreDbUtil(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -45,7 +44,7 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
 
     public boolean insert(Score score) {
         ContentValues values = new ContentValues();
-        values.put(ScoreContract.ScoreTable.COLUMN_ID, score.getId());
+        values.put(ScoreContract.ScoreTable._ID, score.getId());
         values.put(ScoreContract.ScoreTable.COLUMN_VALUE, score.getValue());
         values.put(ScoreContract.ScoreTable.COLUMN_DATE, score.getDate().getTime());
         return getWritableDatabase().insert(
@@ -85,6 +84,15 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
                 QUERY_COUNT, null, null, null, null, null);
         cursor.moveToFirst();
         int result = cursor.getInt(cursor.getColumnIndex(ScoreContract.ScoreTable.COUNT));
+        cursor.close();
+        return result;
+    }
+
+    public int findMaxId() {
+        Cursor cursor = getReadableDatabase().query(ScoreContract.ScoreTable.TABLE_NAME,
+                QUERY_MAX_ID, null, null, null, null, null);
+        cursor.moveToFirst();
+        int result = cursor.getInt(cursor.getColumnIndex(ScoreContract.ScoreTable.MAX_ID));
         cursor.close();
         return result;
     }

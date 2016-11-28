@@ -50,7 +50,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_game);
         textView=  (TextView) findViewById(R.id.TxtVScore);
         GlobalVar = (SudokuApplication) getApplicationContext();
-        GlobalVar.setPuntuaciopartida(new Score());
+        GlobalVar.setPuntuaciopartida(Score.newScore(getApplicationContext()));
         GlobalVar.setSolution(SudokuSolutionOnedimension);
         GlobalVar.setRootview(findViewById(android.R.id.content));
 

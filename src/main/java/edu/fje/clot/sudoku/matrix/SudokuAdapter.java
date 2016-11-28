@@ -5,24 +5,15 @@ package edu.fje.clot.sudoku.matrix;
  */
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.text.Editable;
-import android.text.InputFilter;
-import android.text.InputType;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import edu.fje.clot.sudoku.R;
-import edu.fje.clot.sudoku.globals.SudokuApplication;
-import edu.fje.clot.sudoku.scores.Score;
 
 
 public class SudokuAdapter extends BaseAdapter {
@@ -69,8 +60,8 @@ public class SudokuAdapter extends BaseAdapter {
                 final RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.EmptyCell);
 
              edtxt.setId(i);
-                FocusClickListener.FocusMaker(edtxt,rel,context );
-              //  FocusClickListener.ErrorPaintListener( (EditText) rel.getChildAt(0), rel, rel2,text);
+                Util.FocusMaker(edtxt,rel,context );
+              //  Util.ErrorPaintListener( (EditText) rel.getChildAt(0), rel, rel2,text);
 
             }else {
                 view = inflter.inflate(R.layout.filledcell, null);
@@ -79,7 +70,7 @@ public class SudokuAdapter extends BaseAdapter {
                 txtview.setId(i);
                 final RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.FilledCell);
 
-                FocusClickListener.FocusMaker(txtview,rel,context);
+                Util.FocusMaker(txtview,rel,context);
 
             }
 

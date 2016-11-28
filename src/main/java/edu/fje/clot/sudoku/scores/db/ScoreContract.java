@@ -14,5 +14,6 @@ final class ScoreContract {
         static final String COLUMN_VALUE = "VALUE";
         static final String COLUMN_NULL = "NULL";
         static final String COUNT = "COUNT(*)";
+        static final String MAX_ID = "MAX(" + _ID + ")";
     }
 }
