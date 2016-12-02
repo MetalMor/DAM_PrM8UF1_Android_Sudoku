@@ -120,7 +120,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
         intent.setType("vnd.android.cursor.item/event");
         intent.putExtra("beginTime", calendari.getTimeInMillis());
         intent.putExtra("allDay", true);
-        intent.putExtra("rrule", "FREQ=YEARLY");
+        //intent.putExtra("rrule", "FREQ=YEARLY");
         intent.putExtra("endTime", calendari.getTimeInMillis() +  60 * 1000);
         intent.putExtra("title", "Puntuacio obtinguda Passatemps Sudoku");
         intent.putExtra("description", "Data: "+Puntuacio.getDate().toString()+" Puntuacio: "+Puntuacio.getValue());
