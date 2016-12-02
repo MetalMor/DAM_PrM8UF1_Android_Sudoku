@@ -3,6 +3,7 @@ package edu.fje.clot.sudoku.activities;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -106,9 +107,25 @@ public class GameActivity extends Activity implements View.OnClickListener {
     public void onDestroy() {
         ScoreDbUtil Dbutils = new ScoreDbUtil(this);
         Dbutils.insert(GlobalVar.getPuntuaciopartida());
-       // Dbutils.insertToCalendar(GlobalVar.getPuntuaciopartida());
-        //
+        //Dbutils.insertToCalendar(GlobalVar.getPuntuaciopartida(),this);
+        afegirEvent(GlobalVar.getPuntuaciopartida());
         super.onDestroy();
 
+    }
+
+    private void afegirEvent(Score Puntuacio) {
+
+        Calendar calendari = Calendar.getInstance();
+        Intent intent = new Intent(Intent.ACTION_EDIT);
+        intent.setType("vnd.android.cursor.item/event");
+        intent.putExtra("beginTime", calendari.getTimeInMillis());
+        intent.putExtra("allDay", true);
+        intent.putExtra("rrule", "FREQ=YEARLY");
+        intent.putExtra("endTime", calendari.getTimeInMillis() +  60 * 1000);
+        intent.putExtra("title", "Puntuacio obtinguda Passatemps Sudoku");
+        intent.putExtra("description", "Data: "+Puntuacio.getDate().toString()+" Puntuacio: "+Puntuacio.getValue());
+        intent.putExtra("eventLocation", "Geolocacio");
+
+        startActivityForResult(intent,1);
     }
 }

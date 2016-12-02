@@ -2,9 +2,11 @@ package edu.fje.clot.sudoku.scores.db;
 
 
 import android.Manifest;
+import android.app.Application;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +15,7 @@ import android.net.Uri;
 import android.provider.CalendarContract;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,6 +24,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import edu.fje.clot.sudoku.globals.SudokuApplication;
 import edu.fje.clot.sudoku.scores.Score;
 
 /**
@@ -41,7 +45,6 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
     private static final String[] QUERY_COUNT = {ScoreContract.ScoreTable.COUNT};
     private static final String[] QUERY_MAX_ID = {ScoreContract.ScoreTable.MAX_ID};
     private static final String BY_ID = ScoreContract.ScoreTable._ID + "=?";
-
     private static final String SQL_CREATE_TABLE = "CREATE TABLE " +
             ScoreContract.ScoreTable.TABLE_NAME + " (" +
             ScoreContract.ScoreTable._ID + " INTEGER PRIMARY KEY, " +
@@ -52,6 +55,7 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
     public ScoreDbUtil(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         setContentResolver(context.getContentResolver());
+        setContext(context);
     }
 
     public boolean insert(Score score) {
@@ -66,14 +70,18 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
         ) >= 0;
     }
 
-    public boolean insertToCalendar(Score score) {
+    public boolean insertToCalendar(Score score,Context context) {
         ContentValues cv = new ContentValues();
         cv.put(CalendarContract.Events.CALENDAR_ID, 1); // Tipus de calendari
         cv.put(CalendarContract.Events.TITLE, "SUDOKU - Puntuacio: " + score.getValue());
         cv.put(CalendarContract.Events.DTSTART, Calendar.getInstance().getTimeInMillis());
         cv.put(CalendarContract.Events.DTEND, Calendar.getInstance().getTimeInMillis());
         cv.put(CalendarContract.Events.EVENT_TIMEZONE, "Europe/Madrid");
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED)
+      //  Application application = (Application) SudokuApplication.getContext();
+       // SudokuApplication app = (SudokuApplication)application;
+       // Context context= app.getContext();
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED)
+
             return false;
         Uri uri = getContentResolver().insert(CalendarContract.Events.CONTENT_URI, cv);
         int id;
