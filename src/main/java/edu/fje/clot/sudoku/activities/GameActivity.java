@@ -10,7 +10,6 @@ import java.util.Calendar;
 import java.util.Random;
 
 import edu.fje.clot.sudoku.R;
-import edu.fje.clot.sudoku.globals.ScoreUpdate;
 import edu.fje.clot.sudoku.globals.SudokuApplication;
 import edu.fje.clot.sudoku.matrix.Sudoku;
 
@@ -58,7 +57,7 @@ public class GameActivity extends Activity {
         Grid.setAdapter(customAdapter);
 
 
-        new ScoreUpdate(this, this.findViewById(R.id.activity_game)).execute();
+
 
 
         // GlobalVar.getPuntuaciopartida();
@@ -122,7 +121,6 @@ public class GameActivity extends Activity {
         intent.setType("vnd.android.cursor.item/event");
         intent.putExtra("beginTime", calendari.getTimeInMillis());
         intent.putExtra("allDay", true);
-        //intent.putExtra("rrule", "FREQ=YEARLY");
         intent.putExtra("endTime", calendari.getTimeInMillis() +  60 * 1000);
         intent.putExtra("title", "Puntuacio obtinguda Passatemps Sudoku");
         intent.putExtra("description", "Data: "+Puntuacio.getDate().toString()+" Puntuacio: "+Puntuacio.getValue());
