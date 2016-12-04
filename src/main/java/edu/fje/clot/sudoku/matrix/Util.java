@@ -105,46 +105,33 @@ public class Util {
 
 
     public static void FocusMaker(View v, final RelativeLayout rel,final Context context){
-
         v.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    PaintPosition(v,rel, true,context);
-                }else{
-
-                    // RelativeLayout rel = (RelativeLayout) v.findViewById(R.id.EmptyCell);
-                    rel.setBackgroundResource(R.drawable.cell_shape);
-
-                }
-
-            }});
-
+                if (hasFocus) PaintPosition(v, rel, true, context);
+                else rel.setBackgroundResource(R.drawable.cell_shape);
+            }}
+        );
     }
 
-private static void SumaPuntuacio(View v, Context context, RelativeLayout rel){
-
-
-     SudokuApplication GlobalVar = (SudokuApplication) context;
-    int position = v.getId();
+    private static void SumaPuntuacio(View v, Context context, RelativeLayout rel){
+        SudokuApplication GlobalVar = (SudokuApplication) context;
+        int position = v.getId();
         int[] solution = GlobalVar.getSolution();
 
-     Score score = GlobalVar.getPuntuaciopartida();
-    if (TextContent(v).equals(Integer.toString(solution[position])) ){
-     score.ValueIncrement(10);Log.i("Suma","+60" );}
+        Score score = GlobalVar.getPuntuaciopartida();
+        if (TextContent(v).equals(Integer.toString(solution[position])) ){
+        score.ValueIncrement(10);Log.i("Suma","+60" );}
         else{
             score.ValueIncrement(-1);   Log.i("Resta","-5" ); }
-     GlobalVar.setPuntuaciopartida(score);
-     Log.i("TextContent",TextContent(v) );
-    Log.i("Solucio",Integer.toString(solution[position]) );
-     Application application = (Application)SudokuApplication.getContext();
-     SudokuApplication app = (SudokuApplication)application;
-     View parent = app.getRootview();
-     TextView textView  = (TextView) parent.findViewById(R.id.TxtVScore);
-     textView.setText("Punts: " + Integer.toString(app.getPuntuaciopartida().getValue()));
-
-
-
- }
+        GlobalVar.setPuntuaciopartida(score);
+        Log.i("TextContent",TextContent(v) );
+        Log.i("Solucio",Integer.toString(solution[position]) );
+        Application application = (Application)SudokuApplication.getContext();
+        SudokuApplication app = (SudokuApplication)application;
+        View parent = app.getRootview();
+        TextView textView  = (TextView) parent.findViewById(R.id.TxtVScore);
+        textView.setText("Punts: " + Integer.toString(app.getPuntuaciopartida().getValue()));
+    }
 
     private static void Errorspainting(final RelativeLayout rel,final RelativeLayout rel2,final String text, boolean Mateixacasella) {
         if (rel2.getChildAt(0) instanceof EditText) {

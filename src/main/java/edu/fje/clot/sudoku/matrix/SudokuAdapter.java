@@ -47,36 +47,37 @@ public class SudokuAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        int Q = getSquarePosition(i);
+        if (sudoku1dimension[i]==0){
+            view = inflter.inflate(R.layout.emptycell, null);
+            final EditText edtxt = (EditText) view.findViewById(R.id.SudokuVariableNumber);
+            final RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.EmptyCell);
+            if (Q%2==0)
+               rel.setBackgroundResource(R.drawable.cell_shapeblue);
+            edtxt.setId(i);
+            Util.FocusMaker(edtxt,rel,context );
 
-            if (sudoku1dimension[i]==0){
+        } else {
+            view = inflter.inflate(R.layout.filledcell, null);
+            final TextView txtview = (TextView) view.findViewById(R.id.SudokuNumberFix);
+            txtview.setText(Integer.toString(sudoku1dimension[i]));
+            txtview.setId(i);
+            final RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.FilledCell);
+            if (Q%2==0)
+                rel.setBackgroundResource(R.drawable.cell_shapeblue);
+            Util.FocusMaker(txtview,rel,context);
 
-                view = inflter.inflate(R.layout.emptycell, null);
-                final EditText edtxt = (EditText) view.findViewById(R.id.SudokuVariableNumber);
-                final RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.EmptyCell);
-                int Q=((((i)/3)%3)+1)+3*(((i/9)/3)+1);
-                if (Q%2==0)
-                   rel.setBackgroundResource(R.drawable.cell_shapeblue);
-             edtxt.setId(i);
-                Util.FocusMaker(edtxt,rel,context );
-              //  Util.ErrorPaintListener( (EditText) rel.getChildAt(0), rel, rel2,text);
-
-            }else {
-                view = inflter.inflate(R.layout.filledcell, null);
-                final TextView txtview = (TextView) view.findViewById(R.id.SudokuNumberFix);
-                txtview.setText(Integer.toString(sudoku1dimension[i]));
-                txtview.setId(i);
-                final RelativeLayout rel = (RelativeLayout) view.findViewById(R.id.FilledCell);
-                int Q=((((i)/3)%3)+1)+3*(((i/9)/3)+1);
-                if (Q%2==0)
-                    rel.setBackgroundResource(R.drawable.cell_shapeblue);
-                Util.FocusMaker(txtview,rel,context);
-
-            }
-
-
-
+        }
         return view;
     }
 
+    /**
+     * Retorna la posicio del quadrant del sudoku en funcio de l'index especificat.
+     * @param index int
+     * @return int
+     */
+    private static int getSquarePosition(int index) {
+        return (((index/3)%3)+1)+3*(((index/9)/3)+1);
+    }
 
 }

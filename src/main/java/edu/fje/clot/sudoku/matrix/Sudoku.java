@@ -1,35 +1,26 @@
 package edu.fje.clot.sudoku.matrix;
 
-import java.math.RoundingMode;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
+ * Classe que representa un sudoku.
  * Created by oriol on 11/8/16.
  */
 
 public class Sudoku {
+
     private static Sudoku instance;
-
-    public int[][] getMatrix() {
-        return matrix;
-    }
-
-    public void setMatrix(int[][] matrix) {
-        this.matrix = matrix;
-    }
-
-    int[][] matrix= new int[9][9];
     private Random rand = new Random();
-    public Sudoku(int[][] matrix) {
-        this.matrix = matrix;
-    }
-    public Sudoku() {
 
-    }
+    /**
+     * Constructor privat buit
+     */
+    private Sudoku() { }
 
+    /**
+     * Retorna l'objecte sudoku (unic). Si no existeix, el crea.
+     * @return Sudoku
+     */
     public static Sudoku getInstance(){
         if( instance == null ){
             instance = new Sudoku();
@@ -37,6 +28,11 @@ public class Sudoku {
         return instance;
     }
 
+    /**
+     * Transforma una matriu sudoku bidimensional en una unidimensional.
+     * @param Bidimensional int[][]
+     * @return int[]
+     */
     public static int[] ConvertoOneDimension(int[][] Bidimensional){
         int[] vector = new int[Bidimensional[0].length*Bidimensional.length];
         int n=0;
@@ -49,6 +45,11 @@ public class Sudoku {
         return vector;
     }
 
+    /**
+     * Transforma una matriu sudoku unidimensional en una bidimensional
+     * @param matrix int[]
+     * @return int[][]
+     */
     public static int[][] ConvertoTwoDimension(int[] matrix) {
         int length = (int) Math.sqrt(matrix.length);
         int[][] vector = new int[length][length];
@@ -60,8 +61,13 @@ public class Sudoku {
         return vector;
     }
 
-    public int[][] ClearSudoku(int[][] sudoku,int Q){
-        Random rand = new Random();
+    /**
+     * Elimina una quantitat Q de nombres a una matriu bidimensional sudoku.
+     * @param sudoku int[][]
+     * @param Q int
+     * @return int[][]
+     */
+    public int[][] ClearSudoku(int[][] sudoku,int Q) {
         int i =0;
         int Totalquadrat=(81-Q)/9;
         while(i<Q){
@@ -72,10 +78,18 @@ public class Sudoku {
                 i++;
             }
         }
-
-    return sudoku;
+        return sudoku;
     }
-    public int elementsinsquash(int[][]sudoku,int x,int y){
+
+    /**
+     * Retorna el nombre d'elements existents a una seccio de
+     * la matriu sudoku.
+     * @param sudoku int[][]
+     * @param x int
+     * @param y int
+     * @return int
+     */
+    private int elementsinsquash(int[][]sudoku,int x,int y){
         int minx=(x/3)*3; int maxx = (x/3)*3+3;
         int miny=(y/3)*3; int maxy = (y/3)*3+3;
         int nelements=0;
@@ -87,7 +101,4 @@ public class Sudoku {
         }
         return nelements;
     }
-
-
-
 }

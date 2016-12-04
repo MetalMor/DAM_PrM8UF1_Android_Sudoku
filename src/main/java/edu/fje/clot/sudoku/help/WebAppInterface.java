@@ -5,6 +5,7 @@ import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
 /**
+ * Classe que carrega la interficie d'ajuda.
  * Created by oriol on 11/25/16.
  */
 
@@ -13,14 +14,15 @@ public class WebAppInterface {
     Context mContext;
 
     /**
-     * instancia la interfície i l'associa el context
+     * Constructor amb 1 parametre.
+     * Assigna un context.
      */
     WebAppInterface(Context c) {
         mContext = c;
     }
 
     /**
-     * mostra una torrada
+     * Mostra un pop-up.
      */
     @JavascriptInterface
     public void mostrarToast(String toast) {

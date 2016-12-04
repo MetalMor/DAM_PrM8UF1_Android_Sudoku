@@ -13,6 +13,9 @@ import edu.fje.clot.sudoku.scores.mask.IScores;
 import edu.fje.clot.sudoku.scores.ScoreAdapter;
 import edu.fje.clot.sudoku.scores.mask.ScoresDb;
 
+/**
+ * Activitat principal del joc.
+ */
 public class MainActivity extends Activity implements View.OnClickListener {
     IScores Puntuacions;
     ScoreAdapter adapter;
@@ -23,6 +26,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
             R.drawable.medallabronze,
     };
 
+    /**
+     * Inicialitza el component.
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,30 +37,28 @@ public class MainActivity extends Activity implements View.OnClickListener {
         findViewById(R.id.play).setOnClickListener(this);
 
         Puntuacions = new ScoresDb(getApplicationContext());
-        //Puntuacions = new Scores();
 
         adapter = new ScoreAdapter(this, Puntuacions, imatges);
         ((ListView) findViewById(R.id.LlistaPuntuacions)).setAdapter(adapter);
         helpimg = (ImageView) findViewById(R.id.imageView2);
         helpimg.setImageResource(R.drawable.help);
         findViewById(R.id.imageView2).setOnClickListener(this);
-
-
-
     }
+
+    /**
+     * Accio al tocar una vista de l'activitat.
+     * @param arg0 View
+     */
     public void onClick(View arg0) {
         switch(arg0.getId()){
-
-            case R.id.play: /** Start a new Activity MyCards.java */
+            case R.id.play:
                 Intent intent = new Intent(this, GameActivity.class);
                 startActivity(intent);
                 break;
-
-            case R.id.imageView2 :/** AlerDialog when click on Exit */
+            case R.id.imageView2:
                 Intent intent2 = new Intent(this, HelpActivity.class);
                 startActivity(intent2);
                 break;
         }
-
     }
 }

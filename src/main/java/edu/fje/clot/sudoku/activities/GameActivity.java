@@ -1,25 +1,12 @@
 package edu.fje.clot.sudoku.activities;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.CalendarContract;
-import android.support.v4.app.ActivityCompat;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Random;
 
 import edu.fje.clot.sudoku.R;
@@ -30,15 +17,13 @@ import edu.fje.clot.sudoku.matrix.Sudoku;
 import edu.fje.clot.sudoku.matrix.SudokuAdapter;
 import edu.fje.clot.sudoku.scores.Score;
 import edu.fje.clot.sudoku.scores.db.ScoreDbUtil;
-import edu.fje.clot.sudoku.scores.mask.ScoresDb;
-
-import static android.R.id.list;
 
 /**
+ * Activitat de la pantalla del joc.
  * Created by oriol on 11/12/16.
  */
 
-public class GameActivity extends Activity implements View.OnClickListener {
+public class GameActivity extends Activity {
     int[][] SudokuSolution;
     int[][] EmptySudoku;
 
@@ -49,6 +34,10 @@ public class GameActivity extends Activity implements View.OnClickListener {
     TextView textView;
     SudokuApplication GlobalVar;
 
+    /**
+     * Inicialitza el component.
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -76,6 +65,10 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
     }
 
+    /**
+     * Retorna una matriu sudoku aleatoria.
+     * @return int[]
+     */
     private int[] randomSudoku() {
        Random rand = new Random();
         return getResources().getIntArray(
@@ -83,19 +76,20 @@ public class GameActivity extends Activity implements View.OnClickListener {
                         ]);
     }
 
-
-
-
-    @Override
-    public void onClick(View view) {
-
-    }
-
+    /**
+     * Guarda l'estat de l'aplicacio.
+     * @param outState Bundle
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
         outState.putInt("gridView" ,Grid.getId());
     }
+
+    /**
+     * Recupera l'estat de l'aplicacio.
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -104,6 +98,9 @@ public class GameActivity extends Activity implements View.OnClickListener {
         Grid.setId(viewId);
     }
 
+    /**
+     * Destrueix el component. Guarda la puntuacio del joc abans de fer-ho.
+     */
     public void onDestroy() {
         ScoreDbUtil Dbutils = new ScoreDbUtil(this);
         Dbutils.insert(GlobalVar.getPuntuaciopartida());
@@ -113,6 +110,11 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
     }
 
+    /**
+     * Afegeix un esdeveniment al calendari segons l'objecte puntuacio especificat
+     * per parametre.
+     * @param Puntuacio Score
+     */
     private void afegirEvent(Score Puntuacio) {
 
         Calendar calendari = Calendar.getInstance();
