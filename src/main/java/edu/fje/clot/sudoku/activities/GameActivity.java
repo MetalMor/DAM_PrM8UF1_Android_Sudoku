@@ -43,7 +43,7 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         int[] SudokuSolutionOnedimension = randomSudoku();
         SudokuSolution = Sudoku.ConvertoTwoDimension(SudokuSolutionOnedimension);
-        EmptySudoku = Sudoku.getInstance().ClearSudoku(SudokuSolution, 50);
+        EmptySudoku = Sudoku.getInstance().ClearSudoku(SudokuSolution, 46);
         setContentView(R.layout.activity_game);
         textView = (TextView) findViewById(R.id.TxtVScore);
         GlobalVar = (SudokuApplication) getApplicationContext();
