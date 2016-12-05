@@ -20,7 +20,17 @@ import edu.fje.clot.sudoku.scores.Score;
  * Created by oriol on 11/19/16.
  */
 
+/**
+ * Aquesta Classe fa que funcioni el sudoku corectament, colereig i pintar errors + punutació
+ *
+ */
 public class Util {
+
+    /**
+     * Torna com a paràmetre el contingut d'una casella sigui edit text o text view
+     * @param v
+     * @return
+     */
         public static String TextContent(View v){
             String text="";
             if (v instanceof EditText)
@@ -30,6 +40,14 @@ public class Util {
                 text=  ((TextView)v).getText().toString();
             return text;
         }
+
+    /**
+     *
+     * Aquest métode retorna el relative layout d'una posició concreta i la pinta de verd. S'utilitza en Paint Position.
+     * @param rel
+     * @param i
+     * @return
+     */
  public static RelativeLayout GetRelativeLayoutFromGrid(RelativeLayout rel, int i){
 
      RelativeLayout rel2 =(RelativeLayout) ((ViewGroup) rel.getParent()).getChildAt(i);
@@ -37,6 +55,14 @@ public class Util {
      return rel2;
  }
 
+    /**
+     *Aquest métode pinta les posicions. primer del color que els hi pertoca com a cel·les que són i despres focused si estan en posició
+     * focused.
+     * @param v
+     * @param rel
+     * @param listener
+     * @param context
+     */
     public static void PaintPosition(View v, final RelativeLayout rel,boolean listener,Context context ){
 
         final String text=TextContent(v);
@@ -102,7 +128,13 @@ public class Util {
 
     }
 
-
+    /**
+     * Aquesta funció és la primera d'aquesta classe i és un listener per saber en quina està posicionada el cursor. A partir d'aqui
+     * es pinten totes les altres del color que li toca.
+     * @param v
+     * @param rel
+     * @param context
+     */
 
     public static void FocusMaker(View v, final RelativeLayout rel,final Context context){
         v.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -113,6 +145,13 @@ public class Util {
         );
     }
 
+    /**
+     * Aquesta funció serveix per sumar la puntuació en cas de que al ser modificada el resultat estigui bé o en cas de que no, restar-li puntuació
+     *
+     * @param v
+     * @param context
+     * @param rel
+     */
     private static void SumaPuntuacio(View v, Context context, RelativeLayout rel){
         SudokuApplication GlobalVar = (SudokuApplication) context;
         int position = v.getId();
@@ -133,6 +172,14 @@ public class Util {
         textView.setText("Punts: " + Integer.toString(app.getPuntuaciopartida().getValue()));
     }
 
+    /**
+     *
+     * Aquesta funció serveix per determinar si el numero està repetit en una altra cel·la plena i en aquest cas pinar-hi un error.
+     * @param rel
+     * @param rel2
+     * @param text
+     * @param Mateixacasella
+     */
     private static void Errorspainting(final RelativeLayout rel,final RelativeLayout rel2,final String text, boolean Mateixacasella) {
         if (rel2.getChildAt(0) instanceof EditText) {
             String text2="";
@@ -170,6 +217,15 @@ public class Util {
         }
     }
 
+    /**
+     * Aquest Listener s'activa cada vegada que una cel·la és canviada, priemr es pinta la posició, després els errors si hi ha i després es suma la puntuació
+     * @param v
+     * @param edtxt
+     * @param rel
+     * @param rel2
+     * @param text
+     * @param context
+     */
     public static void ErrorPaintListener(final View v, final EditText edtxt, final RelativeLayout rel, final RelativeLayout rel2, final String text, final Context context) {
 
         edtxt.addTextChangedListener(new TextWatcher() {
