@@ -20,31 +20,71 @@ import edu.fje.clot.sudoku.scores.mask.IScores;
 
 public class ScoreAdapter extends BaseAdapter{
     // Declare Variables
+    /**
+     * Context a on s'allotja l'Adapter.
+     */
     private Context context;
+    /**
+     * Llista activa de puntuacions.
+     */
     private IScores Puntuacions;
+    /**
+     * Llista estatica d'identificadors de recursos d'imatge.
+     */
     private int[] imatges;
+    /**
+     * Inflater emprat per introduir elements a la llista de puntuacions.
+     */
     private LayoutInflater inflater;
 
+    /**
+     * Constructor que assigna context, sistema de puntuacions i recursos d'imatge.
+     * @param context Context
+     * @param Puntuacions IScores
+     * @param imatges int[]
+     */
     public ScoreAdapter(Context context, IScores Puntuacions, int[] imatges) {
         this.context = context;
         this.Puntuacions = Puntuacions;
         this.imatges=imatges;
     }
 
+    /**
+     * Retorna el recompte de puntuacions.
+     * @return int
+     */
     public int getCount() {
         return Puntuacions.count();
     }
 
+    /**
+     * Retorna un item a la posicio especificada.
+     * @param position int
+     * @return Object
+     */
     @Override
     public Object getItem(int position) {
-        return null;
+        return Puntuacions.getItem(position);
     }
 
+    /**
+     * Retorna l'identificador de l'element a la posicio especificada.
+     * @param position int
+     * @return long
+     */
     @Override
     public long getItemId(int position) {
-        return 0;
+        return ((Score) getItem(position)).getId();
     }
 
+    /**
+     * Retorna la vista corresponent als parametres especificats. Buscara a la llista de
+     * puntuacions l'element que toca en cada moment, i l'insertara amb la imatge adient.
+     * @param position int
+     * @param convertView View
+     * @param parent ViewGroup
+     * @return View
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
 
         // Declare Variables

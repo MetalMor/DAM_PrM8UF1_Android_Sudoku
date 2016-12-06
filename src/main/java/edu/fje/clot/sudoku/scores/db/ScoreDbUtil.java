@@ -15,8 +15,6 @@ import android.net.Uri;
 import android.provider.CalendarContract;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,40 +22,84 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import edu.fje.clot.sudoku.globals.SudokuApplication;
 import edu.fje.clot.sudoku.scores.Score;
 
 /**
+ * Classe d'utilitat de persistencia que representa la taula de puntuacions.
  * Created by m0r on 21/11/16.
  */
 
 public class ScoreDbUtil extends SQLiteOpenHelper {
+    /**
+     * Objecte de resolucio de continguts.
+     */
     private ContentResolver _contentResolver;
+    /**
+     * Context en el que es desenvolupen les operacions de persistencia.
+     */
     private Context _context;
+    /**
+     * Nom de la base de dades.
+     */
     private static final String DATABASE_NAME = "Score.db";
+    /**
+     * Versio de la base de dades.
+     */
     private static final int DATABASE_VERSION = 1;
+    /**
+     * Indicador d'ordre de seleccio de dades.
+     */
     private static final String ORDER = ScoreContract.ScoreTable.COLUMN_VALUE + " DESC";
+    /**
+     * Vector de projeccio de dades a la taula.
+     */
     private static final String[] QUERY_PROJECTION = {
             ScoreContract.ScoreTable._ID,
             ScoreContract.ScoreTable.COLUMN_DATE,
             ScoreContract.ScoreTable.COLUMN_VALUE
     };
+    /**
+     * Vetor de projeccio de recompte de dades.
+     */
     private static final String[] QUERY_COUNT = {ScoreContract.ScoreTable.COUNT};
+    /**
+     * Vector de projeccio d'identificador maxim.
+     */
     private static final String[] QUERY_MAX_ID = {ScoreContract.ScoreTable.MAX_ID};
+    /**
+     * String de seleccio per identificador.
+     */
     private static final String BY_ID = ScoreContract.ScoreTable._ID + "=?";
+    /**
+     * String SQL de creacio de la taula.
+     */
     private static final String SQL_CREATE_TABLE = "CREATE TABLE " +
             ScoreContract.ScoreTable.TABLE_NAME + " (" +
             ScoreContract.ScoreTable._ID + " INTEGER PRIMARY KEY, " +
             ScoreContract.ScoreTable.COLUMN_DATE + " LONG DEFAULT 0, " +
             ScoreContract.ScoreTable.COLUMN_VALUE + " INTEGER DEFAULT 0)";
+    /**
+     * String SQL d'eliminacio de la taula en cas que existeixi.
+     */
     private static final String SQL_DROP_TABLE_IF_EXISTS = "DROP TABLE IF EXISTS " + ScoreContract.ScoreTable.TABLE_NAME;
 
+    /**
+     * Constructor amb parametre de context. Assigna un objecte de resolucio de continguts a
+     * mes del propi context.
+     * @param context Context
+     */
     public ScoreDbUtil(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         setContentResolver(context.getContentResolver());
         setContext(context);
     }
 
+    /**
+     * Inserta un nou objecte Score a la base de dades. Retorna si el resultat de la insercio
+     * es major que 0, es a dir, si la operacio ha sigut fructifera.
+     * @param score Score
+     * @return boolean
+     */
     public boolean insert(Score score) {
         ContentValues values = new ContentValues();
         values.put(ScoreContract.ScoreTable._ID, score.getId());
@@ -70,6 +112,13 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
         ) >= 0;
     }
 
+    /**
+     * Inserta un objecte de puntuacio com un event al calendari. Retorna false en cas que no
+     * ho aconsegueixi.
+     * @param score Score
+     * @param context Context
+     * @return boolean
+     */
     public boolean insertToCalendar(Score score,Context context) {
         ContentValues cv = new ContentValues();
         cv.put(CalendarContract.Events.CALENDAR_ID, 1); // Tipus de calendari
@@ -80,7 +129,7 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
       //  Application application = (Application) SudokuApplication.getContext();
        // SudokuApplication app = (SudokuApplication)application;
        // Context context= app.getContext();
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED)
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED)
 
             return false;
         Uri uri = getContentResolver().insert(CalendarContract.Events.CONTENT_URI, cv);
@@ -97,7 +146,7 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
 
     /**
      * Inserta en la base de datos la lista de puntuaciones pasada por parametro.
-     * @param scores Lista de puntuaciones.
+     * @param scores List<Score>
      * @return boolean.
      */
     public boolean insertAll(List<Score> scores) {
@@ -108,6 +157,11 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
         return result;
     }
 
+    /**
+     * Troba un element en concret de la taula a partir del seu identificador.
+     * @param _id int
+     * @return Score
+     */
     public Score find(int _id) {
         String[] args = { String.valueOf(_id) };
         Cursor cursor = getReadableDatabase().query(ScoreContract.ScoreTable.TABLE_NAME,
@@ -125,6 +179,10 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
         return result;
     }
 
+    /**
+     * Retorna el recompte d'elements a la taula.
+     * @return int
+     */
     public int count() {
         Cursor cursor = getReadableDatabase().query(ScoreContract.ScoreTable.TABLE_NAME,
                 QUERY_COUNT, null, null, null, null, null);
@@ -134,6 +192,10 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
         return result;
     }
 
+    /**
+     * Retorna l'identificador amb valor maxim.
+     * @return int
+     */
     public int findMaxId() {
         Cursor cursor = getReadableDatabase().query(ScoreContract.ScoreTable.TABLE_NAME,
                 QUERY_MAX_ID, null, null, null, null, null);
@@ -143,6 +205,11 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
         return result;
     }
 
+    /**
+     * Retorna la llista sencera d'objectes de puntuacio, ordenats a partir del valor
+     * de forma descendent.
+     * @return List<Score>
+     */
     public List<Score> findAll() {
         List<Score> result = new ArrayList<>();
         Cursor cursor = getReadableDatabase().query(ScoreContract.ScoreTable.TABLE_NAME,
@@ -159,6 +226,11 @@ public class ScoreDbUtil extends SQLiteOpenHelper {
         return result;
     }
 
+    /**
+     * Retorna un numero determinat d'elements a partir del primer.
+     * @param top int
+     * @return List<Score>
+     */
     public List<Score> findTop(int top) {
         List<Score> result = new ArrayList<>();
         final String LIMIT = " LIMIT" + top;
